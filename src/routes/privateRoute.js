@@ -7,7 +7,7 @@ const PrivateRoute = (props) => {
   // Destructure props from <privateRoute>
   const { component: Component, ...rest } = props;
   console.log(props.location);
-  return context.isAuthenticated === true ? (
+  return context.user !== null ? (
     <Route {...rest} render={(props) => <Component {...props} />} />
   ) : (
     <Redirect

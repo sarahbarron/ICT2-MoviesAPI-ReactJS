@@ -12,6 +12,7 @@ import GenresContextProvider from "./contexts/genresContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import AuthenticationPage from "./pages/authenticationPage";
 import AuthContextProvider from "./contexts/authContext";
+import PrivateRoute from "./routes/privateRoute";
 
 const App = () => {
   return (
@@ -24,18 +25,21 @@ const App = () => {
               <GenresContextProvider>
                 <Switch>
                   <Route exact path="/login" component={AuthenticationPage} />
-                  <Route
+                  <PrivateRoute
                     exact
                     path="/movies/favorites"
                     component={FavoriteMoviesPage}
                   />
-                  <Route
+                  <PrivateRoute
                     exact
                     path="/reviews/form"
                     component={AddMovieReviewPage}
                   />
-                  <Route path="/reviews/:id" component={MovieReviewPage} />
-                  <Route path="/movies/:id" component={MoviePage} />
+                  <PrivateRoute
+                    path="/reviews/:id"
+                    component={MovieReviewPage}
+                  />
+                  <PrivateRoute path="/movies/:id" component={MoviePage} />
                   <Route path="/movies" component={HomePage} />
                   <Route path="/" component={AuthenticationPage} />
 

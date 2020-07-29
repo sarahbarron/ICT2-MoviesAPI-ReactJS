@@ -4,12 +4,12 @@ import {
   auth,
   signInWithGoogle,
   firestoreCreateUserDocument,
-  firestore,
 } from "../../firebase/firebase-utils";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
+import CustomButton from "../buttons/customButton";
 
-const RegisterForm = () => {
+const AuthForm = ({ title, buttonLabel, formType }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { register, handleSubmit, errors } = useForm();
@@ -17,60 +17,96 @@ const RegisterForm = () => {
   const [toHome, setToHome] = useState(false);
   const context = useContext(AuthContext);
 
+  //   When a user chooses to submit using email and password
   const onSubmit = async (data) => {
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        data.email,
-        data.password
-      );
-      if (user !== null || user !== "undefined") {
+      // if the user is registering an account
+      if (formType === "register") {
+        const { user } = await auth.createUserWithEmailAndPassword(
+          data.email,
+          data.password
+        );
+        firestoreCreateUserDocument(user);
         authenticated(user);
       }
-      firestoreCreateUserDocument(user);
+      //   if the user is logging into a registered account
+      else if (formType === "login") {
+        const { user } = await auth.signInWithEmailAndPassword(
+          data.email,
+          data.password
+        );
+        authenticated(user);
+      }
     } catch (e) {
       setSubmitError(e.message);
+      setEmail("");
+      setPassword("");
       console.log("Error Signing up with email and password: ", e);
     }
   };
 
+  //   when the user is typing into the form input fields
+  const onChangeHandler = (event) => {
+    const { name, value } = event.currentTarget;
+    try {
+      if (name === "email") {
+        setEmail(value);
+      } else if (name === "password") {
+        setPassword(value);
+      }
+    } catch (e) {
+      console.log("error with onChangeHandler: ", e);
+    }
+  };
+
+  //   method for registering or logging in with firebase and google
   const onSubmitGoogle = async () => {
     try {
       const { user } = await signInWithGoogle();
 
       if (user !== null || user !== "undefined") {
         authenticated(user);
-      } else context.updateUser(null);
+      } else context.setUser(null);
+      //    if the user is not stored in the database store it
       firestoreCreateUserDocument(user);
     } catch (error) {
       setSubmitError(error);
+      setEmail("");
+      setPassword("");
       console.log("Error signing in with Google Auth: ", error);
     }
   };
 
+  //   After a user has been authenticated set the state
+  // values back to blank and ToHome to True
   const authenticated = (user) => {
-    context.updateUser(user);
-    setEmail("");
-    setPassword("");
-    setToHome(true);
-  };
-
-  if (toHome === true) {
-    return <Redirect to="/movies" />;
-  }
-
-  const onChangeHandler = (event) => {
-    const { name, value } = event.currentTarget;
-
-    if (name === "email") {
-      setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
+    try {
+      context.setUser(user);
+      setEmail("");
+      setPassword("");
+      setToHome(true);
+    } catch (e) {
+      console.log(
+        "Error trying to reset state variable in after authentication: ",
+        e
+      );
     }
   };
 
+  //  if toHome is true (i.e the user is authenticated)
+  // redirect to the home page
+  if (toHome === true) {
+    try {
+      return <Redirect to="/movies" />;
+    } catch (e) {
+      console.log("Error redirecting from authentication to movies page: ", e);
+    }
+  }
+
+  //   The Registration / Login Form
   return (
     <form className="form bg-dark text-light" onSubmit={handleSubmit(onSubmit)}>
-      <h3>Register</h3>
+      <h3>{title}</h3>
       <div className="form-group">
         <label htmlFor="userEmail">Email:</label>
         <input
@@ -100,25 +136,26 @@ const RegisterForm = () => {
         <p className="text-white">{errors.password.message} </p>
       )}
 
-      <button
+      {/* Button for register/login with email and password */}
+      <CustomButton
         onClick={(event) => {
           handleSubmit(event, email, password);
         }}
-        className="btn btn-primary"
       >
-        Register
-      </button>
-
-      <button
+        {buttonLabel}
+      </CustomButton>
+      {/* Button for register/login with google using firebase  */}
+      <CustomButton
         type="button"
         onClick={onSubmitGoogle}
         className="btn btn-primary"
       >
         Sign In With Google
-      </button>
+      </CustomButton>
+
       <p className="text-white">{submitError} </p>
     </form>
   );
 };
 
-export default RegisterForm;
+export default AuthForm;

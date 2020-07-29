@@ -9,7 +9,8 @@ import { AuthContext } from "../../contexts/authContext";
 const SiteHeader = () => {
   const context = useContext(AuthContext);
   const logout = () => {
-    context.updateUser(null);
+    context.setUser(null);
+    // context.setUser(null);
     auth.signOut();
   };
 

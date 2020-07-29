@@ -6,30 +6,22 @@ export const AuthContext = createContext(null);
 const AuthContextProvider = (props) => {
   const [user, setUser] = useState(null);
 
+  // on mount and dismount use firebase's onAuthStateChanged method
+  // to check if the user is still logged in and authenticated.
+  // set the apps user to the userAuth which will be
+  // either the authenticated user or null if there is nobody authenticated.
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       setUser(userAuth);
       console.log("userAuth : ", userAuth);
     });
-
-    // when a user closes app without logging out
-    // they are automatically logged out here on
-    // unMount
-    // return async () => {
-    //   await auth().signOut();
-    // };
   }, []);
-
-  const updateUser = (user) => {
-    setUser(user);
-    console.log("update user to: ", user);
-  };
 
   return (
     <AuthContext.Provider
       value={{
         user: user,
-        updateUser: updateUser,
+        setUser: setUser,
       }}
     >
       {props.children}

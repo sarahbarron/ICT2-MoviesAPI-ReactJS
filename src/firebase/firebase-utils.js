@@ -33,7 +33,7 @@ provider.setCustomParameters({ prompt: "select_account" });
 // in the Google provider
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-export const firestoreCreateUserDocument = async (userAuth, additionalData) => {
+export const firestoreCreateUserDocument = async (userAuth) => {
   // if a user is not authenticated return with out doing anything
   if (!userAuth) return;
 
@@ -48,13 +48,12 @@ export const firestoreCreateUserDocument = async (userAuth, additionalData) => {
   // if the user does not exist already in the DB save it to the DB
   if (!documentSnapshot.exists) {
     const { email } = userAuth;
-
+    console.log("Email : ", email);
     try {
       // create a user document in the DB with
       // the users display name, email and any additional data
       await userDocumentReference.set({
         email,
-        ...additionalData,
       });
     } catch (error) {
       console.log(

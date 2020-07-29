@@ -1,11 +1,11 @@
 import React from "react";
-import LoginForm from "../components/loginForm/index";
-import RegisterForm from "../components/registerForm/index";
+import Login from "../components/login/index";
+import Register from "../components/register/index";
 const AuthenticationPage = () => {
   return (
     <div className="sign-in-and-sign-up">
-      <LoginForm />
-      <RegisterForm />
+      <Login />
+      <Register />
     </div>
   );
 };

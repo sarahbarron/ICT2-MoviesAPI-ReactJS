@@ -15,7 +15,6 @@ const config = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-console.log(config);
 firebase.initializeApp(config);
 
 // configuring the firebase for google auth
@@ -34,4 +33,36 @@ provider.setCustomParameters({ prompt: "select_account" });
 // in the Google provider
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+export const firestoreCreateUserDocument = async (userAuth, additionalData) => {
+  // if a user is not authenticated return with out doing anything
+  if (!userAuth) return;
+
+  // get the document user reference from firestore using the users uid
+  const userDocumentReference = firestore.doc(`users/${userAuth.uid}`);
+
+  // API call to get the Document Snapshot object using the user reference
+  // the snapshot object has a boolean value property exists that tells
+  // you if the user exists or not
+  const documentSnapshot = await userDocumentReference.get();
+
+  // if the user does not exist already in the DB save it to the DB
+  if (!documentSnapshot.exists) {
+    const { email } = userAuth;
+
+    try {
+      // create a user document in the DB with
+      // the users display name, email and any additional data
+      await userDocumentReference.set({
+        email,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log(
+        "error while trying to create user in firestorm: ",
+        error.message
+      );
+    }
+  }
+  return userDocumentReference;
+};
 export default firebase;

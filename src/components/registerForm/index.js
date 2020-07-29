@@ -1,6 +1,11 @@
 import React, { useState, useContext } from "react";
 import useForm from "react-hook-form";
-import { auth, signInWithGoogle } from "../../firebase/firebase-utils";
+import {
+  auth,
+  signInWithGoogle,
+  firestoreCreateUserDocument,
+  firestore,
+} from "../../firebase/firebase-utils";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 
@@ -21,6 +26,7 @@ const RegisterForm = () => {
       if (user !== null || user !== "undefined") {
         authenticated(user);
       }
+      firestoreCreateUserDocument(user);
     } catch (e) {
       setSubmitError(e.message);
       console.log("Error Signing up with email and password: ", e);
@@ -30,9 +36,11 @@ const RegisterForm = () => {
   const onSubmitGoogle = async () => {
     try {
       const { user } = await signInWithGoogle();
+
       if (user !== null || user !== "undefined") {
         authenticated(user);
       } else context.updateUser(null);
+      firestoreCreateUserDocument(user);
     } catch (error) {
       setSubmitError(error);
       console.log("Error signing in with Google Auth: ", error);

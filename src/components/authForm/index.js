@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, memo } from "react";
 import useForm from "react-hook-form";
 import {
   auth,
@@ -158,4 +158,4 @@ const AuthForm = ({ title, buttonLabel, formType }) => {
   );
 };
 
-export default AuthForm;
+export default memo(AuthForm);

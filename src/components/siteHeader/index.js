@@ -8,6 +8,43 @@ import { AuthContext } from "../../contexts/authContext";
 
 const SiteHeader = () => {
   const context = useContext(AuthContext);
+  let links;
+
+  //  if the user is not authenticated only have a link to sign-in/registration
+  if (context.user === null) {
+    links = (
+      <>
+        <li className="nav-item">
+          <Link className="nav-link text-white" to="/authenticate">
+            Sign-Up / Login
+          </Link>
+        </li>
+      </>
+    );
+  }
+  // otherwise the user is authenticated so include links to access all areas of the app
+  else {
+    links = (
+      <>
+        <li className="nav-item">
+          <Link className="nav-link text-white" to="/">
+            Home
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link text-white" to="/movies/favorites">
+            Favorites
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link className="nav-link text-white" onClick={context.logout} to="/">
+            Logout
+          </Link>
+        </li>
+      </>
+    );
+  }
 
   return (
     <nav className="navbar  navbar-light fixed-top  bg-dark ">
@@ -30,32 +67,7 @@ const SiteHeader = () => {
         size="3x"
       />
       <nav className="navbar navbar-expand ">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/movies/favorites">
-              Favorites
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/authenticate">
-              Login
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className="nav-link text-white"
-              onClick={context.logout}
-              to="/"
-            >
-              Logout
-            </Link>
-          </li>
-        </ul>
+        <ul className="navbar-nav">{links}</ul>
       </nav>
     </nav>
   );

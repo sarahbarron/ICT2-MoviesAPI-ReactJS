@@ -8,11 +8,6 @@ import { AuthContext } from "../../contexts/authContext";
 
 const SiteHeader = () => {
   const context = useContext(AuthContext);
-  const logout = () => {
-    context.setUser(null);
-    // context.setUser(null);
-    auth.signOut();
-  };
 
   return (
     <nav className="navbar  navbar-light fixed-top  bg-dark ">
@@ -52,7 +47,11 @@ const SiteHeader = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" onClick={logout} to="/">
+            <Link
+              className="nav-link text-white"
+              onClick={context.logout}
+              to="/"
+            >
               Logout
             </Link>
           </li>

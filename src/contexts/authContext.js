@@ -17,11 +17,18 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
+  const logout = () => {
+    setUser(null);
+    // context.setUser(null);
+    auth.signOut();
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user: user,
         setUser: setUser,
+        logout: logout,
       }}
     >
       {props.children}

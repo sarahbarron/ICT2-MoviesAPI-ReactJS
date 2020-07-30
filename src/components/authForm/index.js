@@ -8,6 +8,7 @@ import {
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import CustomButton from "../buttons/customButton";
+import "./authForm.css";
 
 const AuthForm = ({ title, buttonLabel, formType }) => {
   const [email, setEmail] = useState("");
@@ -97,7 +98,7 @@ const AuthForm = ({ title, buttonLabel, formType }) => {
   // redirect to the home page
   if (toHome === true) {
     try {
-      return <Redirect to="/movies" />;
+      return <Redirect to="/" />;
     } catch (e) {
       console.log("Error redirecting from authentication to movies page: ", e);
     }
@@ -105,56 +106,64 @@ const AuthForm = ({ title, buttonLabel, formType }) => {
 
   //   The Registration / Login Form
   return (
-    <form className="form bg-dark text-light" onSubmit={handleSubmit(onSubmit)}>
-      <h3>{title}</h3>
-      <div className="form-group">
-        <label htmlFor="userEmail">Email:</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={(event) => onChangeHandler(event)}
-          ref={register({ required: "Email address required" })}
-        />
-      </div>
-      {errors.email && <p className=" text-white">{errors.email.message} </p>}
-      <div className="form-group">
-        <label htmlFor="userPassword">Password:</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={(event) => onChangeHandler(event)}
-          ref={register({ required: "Password required" })}
-        />
-      </div>
-      {errors.password && (
-        <p className="text-white">{errors.password.message} </p>
-      )}
-
-      {/* Button for register/login with email and password */}
-      <CustomButton
-        onClick={(event) => {
-          handleSubmit(event, email, password);
-        }}
+    <>
+      <form
+        className="form bg-dark text-light"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        {buttonLabel}
-      </CustomButton>
-      {/* Button for register/login with google using firebase  */}
-      <CustomButton
-        type="button"
-        onClick={onSubmitGoogle}
-        className="btn btn-primary"
-      >
-        Sign In With Google
-      </CustomButton>
+        <h3>{title}</h3>
 
-      <p className="text-white">{submitError} </p>
-    </form>
+        <div className="form-group">
+          <label htmlFor="userEmail">Email:</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={(event) => onChangeHandler(event)}
+            ref={register({ required: "Email address required" })}
+            autoFocus
+          />
+        </div>
+        {errors.email && <p className=" text-white">{errors.email.message} </p>}
+        <div className="form-group">
+          <label htmlFor="userPassword">Password:</label>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={(event) => onChangeHandler(event)}
+            ref={register({ required: "Password required" })}
+          />
+        </div>
+        {errors.password && (
+          <p className="text-white">{errors.password.message} </p>
+        )}
+
+        {/* Button for register/login with email and password */}
+        <CustomButton
+          onClick={(event) => {
+            handleSubmit(event, email, password);
+          }}
+          className="btn btn-primary space-between"
+        >
+          {buttonLabel}
+        </CustomButton>
+        {/* Button for register/login with google using firebase  */}
+        <CustomButton
+          type="button"
+          onClick={onSubmitGoogle}
+          className="btn btn-primary space-between"
+        >
+          Sign In With Google
+        </CustomButton>
+
+        <p className="text-white">{submitError} </p>
+      </form>
+    </>
   );
 };
 

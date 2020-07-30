@@ -24,7 +24,7 @@ const App = () => {
             <MoviesContextProvider>
               <GenresContextProvider>
                 <Switch>
-                  <Route exact path="/login" component={AuthenticationPage} />
+                  <Route path="/authenticate" component={AuthenticationPage} />
                   <PrivateRoute
                     exact
                     path="/movies/favorites"
@@ -40,8 +40,7 @@ const App = () => {
                     component={MovieReviewPage}
                   />
                   <PrivateRoute path="/movies/:id" component={MoviePage} />
-                  <Route path="/movies" component={HomePage} />
-                  <Route path="/" component={AuthenticationPage} />
+                  <PrivateRoute path="/" component={HomePage} />
 
                   <Redirect from="*" to="/" />
                 </Switch>

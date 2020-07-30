@@ -32,7 +32,7 @@ const SiteHeader = () => {
       <nav className="navbar navbar-expand ">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/movies">
+            <Link className="nav-link text-white" to="/">
               Home
             </Link>
           </li>
@@ -42,7 +42,7 @@ const SiteHeader = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/login">
+            <Link className="nav-link text-white" to="/authenticate">
               Login
             </Link>
           </li>

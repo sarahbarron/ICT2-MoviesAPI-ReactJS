@@ -6,7 +6,7 @@ import { excerpt } from "../../util";
 export default ({ movie }) => {
   const [reviews, setReviews] = useState([]);
 
-  useEffect(({ movie }) => {
+  useEffect(() => {
     getMovieReviews(movie.id).then((reviews) => {
       setReviews(reviews);
     });

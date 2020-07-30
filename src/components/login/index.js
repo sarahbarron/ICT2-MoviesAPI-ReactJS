@@ -3,9 +3,15 @@ import AuthForm from "../authForm/index";
 
 const Login = () => {
   return (
-    <div>
-      <AuthForm title="Login" buttonLabel="Login" formType="login" />
-    </div>
+    <>
+      <div>
+        <AuthForm
+          title="Login Into Existing Account"
+          buttonLabel="Login"
+          formType="login"
+        />
+      </div>
+    </>
   );
 };
 

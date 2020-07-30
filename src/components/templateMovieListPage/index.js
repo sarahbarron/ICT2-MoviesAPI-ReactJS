@@ -10,9 +10,7 @@ const MovieListPageTemplate = ({ movies, title, action }) => {
   let displayedMovies = movies
     .filter((m) => {
       console.log(
-        "id : " +
-          m.id +
-          " : title : " +
+        "title : " +
           m.title +
           " : " +
           m.title.toLowerCase().search(nameFilter.toLowerCase())

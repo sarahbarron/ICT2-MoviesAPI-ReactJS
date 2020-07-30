@@ -1,12 +1,11 @@
 import React from "react";
-import Login from "../components/login/index";
-import Register from "../components/register/index";
-const AuthenticationPage = () => {
+import TemplateAuthPage from "../components/templateAuthPage/index";
+
+const AuthenticationPage = (props) => {
   return (
-    <div className="sign-in-and-sign-up">
-      <Login />
-      <Register />
-    </div>
+    <>
+      <TemplateAuthPage />
+    </>
   );
 };
 

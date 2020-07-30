@@ -9,7 +9,7 @@ const TemplateAuthPage = (props) => {
     <>
       <div id="auth-container" className="container">
         <div className="row">
-          <div className="col">
+          <div id="welcome" className="col-sm">
             <Welcome />
           </div>
         </div>

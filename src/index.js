@@ -18,7 +18,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <div className="jumbotron">
+        <div id="background-img" className="jumbotron">
           <SiteHeader /> {/* New Header  */}
           <div className="container-fluid">
             <MoviesContextProvider>

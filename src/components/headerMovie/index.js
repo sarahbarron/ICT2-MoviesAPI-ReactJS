@@ -4,7 +4,7 @@ import "../../globals/fontawesome";
 
 const MovieHeader = ({ movie }) => {
   return (
-    <div className="row">
+    <div className="row opacity-div">
       <div className="col-6 offset-3">
         <h2>
           {movie.title}

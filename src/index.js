@@ -16,8 +16,8 @@ import PrivateRoute from "./routes/privateRoute";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <BrowserRouter>
         <div id="background-img" className="jumbotron">
           <SiteHeader /> {/* New Header  */}
           <div className="container-fluid">
@@ -40,7 +40,7 @@ const App = () => {
                     component={MovieReviewPage}
                   />
                   <PrivateRoute path="/movies/:id" component={MoviePage} />
-                  <PrivateRoute path="/" component={HomePage} />
+                  <Route path="/" component={HomePage} />
 
                   <Redirect from="*" to="/" />
                 </Switch>
@@ -48,8 +48,8 @@ const App = () => {
             </MoviesContextProvider>
           </div>
         </div>
-      </AuthContextProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthContextProvider>
   );
 };
 

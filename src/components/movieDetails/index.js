@@ -4,7 +4,7 @@ import "./movieDetails.css";
 export default ({ movie }) => {
   return (
     <>
-      <div className="opacity-div">
+      <div id="movie-details" className="opacity-div">
         <h4>Overview</h4>
         <p>{movie.overview}</p>
         <ul className="list-group list-group-horizontal">

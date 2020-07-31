@@ -7,13 +7,19 @@ import MoviesHeader from "../src/components/headerMovieList";
 import MovieList from "../src/components/movieList";
 import MovieDetails from "../src/components/movieDetails";
 import MovieHeader from "../src/components/headerMovie";
-import AddFavoriteButton from "../src/components/buttons/addToFavorites";
+import AddToFavoriteButton from "../src/components/buttons/addToFavorites";
+import ReviewButton from "../src/components/buttons/addReview";
 import MovieReview from "../src/components/movieReview";
 import MovieReviews from "../src/components/movieReviews";
 import ReviewForm from "../src/components/reviewForm";
+import AuthForm from "../src/components/authForm";
+import Login from "../src/components/login";
+import Register from "../src/components/register";
+import CustomButton from "../src/components/buttons/customButton";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
+
 const sample = {
   adult: false,
   backdrop_path: "/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg",
@@ -190,4 +196,66 @@ storiesOf("Movie Add Movie Review Page/reviewForm")
   ))
   .add("default", () => {
     return <ReviewForm movie={sample} />;
+  });
+
+storiesOf("Authentication/AuthForm")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("login", () => {
+    return (
+      <AuthForm
+        title="storeyboard title"
+        buttonLabel="storeyboard Login"
+        formType="login"
+      />
+    );
+  })
+  .add("register", () => {
+    return (
+      <AuthForm
+        title="storeyboard title"
+        buttonLabel="storeyboard Register"
+        formType="register"
+      />
+    );
+  });
+storiesOf("Authentication/Login")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return <Login />;
+  });
+
+storiesOf("Authentication/Register")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return <Register />;
+  });
+
+storiesOf("Buttons")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("custom-button", () => {
+    return (
+      <CustomButton className="btn btn-primary">Custom Button</CustomButton>
+    );
+  })
+  .add("review-button", () => {
+    return <ReviewButton movie={sample}></ReviewButton>;
+  })
+  .add("favorite-button", () => {
+    return (
+      <AddToFavoriteButton
+        movie={sample}
+        type="button"
+        className="btn w-100 btn-warning"
+      >
+        Favorite
+      </AddToFavoriteButton>
+    );
   });

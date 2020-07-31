@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
-import { auth } from "../../firebase/firebase-utils";
+import { auth } from "../../api/firebase-utils";
 import { AuthContext } from "../../contexts/authContext";
 
 const SiteHeader = () => {
@@ -26,11 +26,6 @@ const SiteHeader = () => {
   else {
     links = (
       <>
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/">
-            Home
-          </Link>
-        </li>
         <li className="nav-item">
           <Link className="nav-link text-white" to="/movies/favorites">
             Favorites
@@ -67,7 +62,14 @@ const SiteHeader = () => {
         size="3x"
       />
       <nav className="navbar navbar-expand ">
-        <ul className="navbar-nav">{links}</ul>
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link className="nav-link text-white" to="/">
+              Home
+            </Link>
+          </li>
+          {links}
+        </ul>
       </nav>
     </nav>
   );

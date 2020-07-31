@@ -1,4 +1,9 @@
 .movies {
   padding-top: 10px;
   margin-top: 0px;
+  min-height: 50vh;
+}
+
+.movie-list-bg {
+  background-color: rgba(52, 58, 64, 0.7);
 }

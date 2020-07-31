@@ -4,7 +4,7 @@ import Register from "../register/index";
 import Welcome from "../welcome/index";
 import "./auth-page.css";
 
-const TemplateAuthPage = (props) => {
+const TemplateAuthPage = () => {
   return (
     <>
       <div id="auth-container" className="container">

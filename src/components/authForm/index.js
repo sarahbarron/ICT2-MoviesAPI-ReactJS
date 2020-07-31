@@ -4,7 +4,7 @@ import {
   auth,
   signInWithGoogle,
   firestoreCreateUserDocument,
-} from "../../firebase/firebase-utils";
+} from "../../api/firebase-utils";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import CustomButton from "../buttons/customButton";

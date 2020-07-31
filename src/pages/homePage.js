@@ -3,7 +3,7 @@ import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import AddToFavoritesButton from "../components/buttons/addToFavorites";
 
-const MovieListPage = () => {
+const MovieListPage = (props) => {
   const context = useContext(MoviesContext);
 
   return (

@@ -3,8 +3,6 @@
   margin-top: 5px;
 }
 
-.movie-divs {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
+#movie-details {
+  height: 90%;
 }

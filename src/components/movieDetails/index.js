@@ -2,6 +2,7 @@ import React from "react";
 import "./movieDetails.css";
 
 export default ({ movie }) => {
+  console.log("movie runtime:", movie.runtime);
   return (
     <>
       <div id="movie-details" className="opacity-div">

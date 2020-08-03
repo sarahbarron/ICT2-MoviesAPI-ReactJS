@@ -14,10 +14,9 @@ const AuthContextProvider = (props) => {
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       setUser(userAuth);
-
       console.log("userAuth : ", userAuth);
     });
-  }, user);
+  }, []);
 
   const logout = async () => {
     try {

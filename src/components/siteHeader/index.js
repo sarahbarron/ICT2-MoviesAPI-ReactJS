@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
-import { auth } from "../../api/firebase-utils";
 import { AuthContext } from "../../contexts/authContext";
 
 const SiteHeader = () => {

@@ -29,12 +29,11 @@ const provider = new firebase.auth.GoogleAuthProvider();
 //  this takes some custom parameters - always trigger the google popup
 provider.setCustomParameters({ prompt: "select_account" });
 
-// signInWithPopUp can be used for many providers but we are passing
-// in the Google provider
+// signInWithPopUp can be used for many providers but I am using the Google provider
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export const firestoreCreateUserDocument = async (userAuth) => {
-  // if a user is not authenticated return with out doing anything
+  // if a user is not authenticated return without doing anything
   if (!userAuth) return;
 
   // get the document user reference from firestore using the users uid

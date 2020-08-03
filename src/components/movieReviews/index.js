@@ -12,6 +12,7 @@ export default ({ movie }) => {
       setReviews(reviews);
     });
   }, []);
+
   return (
     <div>
       <table className="table table-striped table-bordered table-hover table-dark">

@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../api/firebase-utils";
+import { Redirect } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
@@ -13,14 +14,19 @@ const AuthContextProvider = (props) => {
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       setUser(userAuth);
+
       console.log("userAuth : ", userAuth);
     });
-  }, []);
+  }, user);
 
-  const logout = () => {
-    setUser(null);
-    // context.setUser(null);
-    auth.signOut();
+  const logout = async () => {
+    try {
+      setUser(null);
+      await auth.signOut();
+      return <Redirect to="/authenticate" />;
+    } catch (e) {
+      console.log("error while trying to log out: ", e);
+    }
   };
 
   return (

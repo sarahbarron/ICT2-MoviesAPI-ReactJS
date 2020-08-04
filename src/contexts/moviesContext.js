@@ -1,5 +1,9 @@
 import React, { useEffect, createContext, useReducer } from "react";
-import { getMovies, getTrendingMovies } from "../api/tmdb-api";
+import {
+  getMovies,
+  getTrendingMovies,
+  getUpcomingMovies,
+} from "../api/tmdb-api";
 
 export const MoviesContext = createContext(null);
 
@@ -14,6 +18,7 @@ const reducer = (state, action) => {
       return {
         movies: [...action.payload.movies],
         trending: [...action.payload.trending],
+        upcoming: [...action.payload.upcoming],
         favorites: [],
       };
     case "add-review":
@@ -35,6 +40,7 @@ const MoviesContextProvider = (props) => {
     movies: [],
     favorites: [],
     trending: [],
+    upcoming: [],
   });
 
   const addToFavorites = (movieId) => {
@@ -46,23 +52,28 @@ const MoviesContextProvider = (props) => {
     dispatch({ type: "add-review", payload: { movie, review } });
   };
 
+  // const async trending = () =>
+  // {
+  //   const trending = await getTrendingMovies();
+  //   dispatch({ type: "trending", payload: {trending}});
+  // };
+
   useEffect(() => {
     async function loadMovies() {
       const trending = await getTrendingMovies();
       console.log("trending: ", trending);
       const movies = await getMovies();
       console.log("movies: ", movies);
-      dispatch({ type: "load-movies", payload: { trending, movies } });
+      const upcoming = await getUpcomingMovies();
+      console.log("upcoming movies: ", upcoming);
+      dispatch({
+        type: "load-movies",
+        payload: { upcoming, trending, movies },
+      });
     }
 
     loadMovies();
   }, []);
-
-  // useEffect(() => {
-  //   getMovies().then((movies) => {
-  //     dispatch({ type: "load-movies", payload: { movies } });
-  //   });
-  // }, []);
 
   return (
     <MoviesContext.Provider
@@ -70,6 +81,7 @@ const MoviesContextProvider = (props) => {
         movies: state.movies,
         favorites: state.favorites,
         trending: state.trending,
+        upcoming: state.upcoming,
         addToFavorites: addToFavorites,
         addReview: addReview,
       }}

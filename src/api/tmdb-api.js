@@ -15,6 +15,15 @@ export const getTrendingMovies = async () => {
   return json;
 };
 
+export const getUpcomingMovies = async () => {
+  const fetchResponse = await fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=1`
+  );
+  const res = await fetchResponse.json();
+  const json = res.results;
+  return json;
+};
+
 export const getMovie = (id) => {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`

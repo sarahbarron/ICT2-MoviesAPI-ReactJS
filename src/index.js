@@ -10,6 +10,7 @@ import SiteHeader from "./components/siteHeader";
 import MoviesContextProvider from "./contexts/moviesContext";
 import GenresContextProvider from "./contexts/genresContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
+import TrendingMoviesPage from "./pages/trendingMoviesPage";
 import AuthenticationPage from "./pages/authenticationPage";
 import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from "./routes/privateRoute";
@@ -38,6 +39,11 @@ const App = () => {
                   <PrivateRoute
                     path="/reviews/:id"
                     component={MovieReviewPage}
+                  />
+
+                  <PrivateRoute
+                    path="/trending"
+                    component={TrendingMoviesPage}
                   />
                   <PrivateRoute path="/movies/:id" component={MoviePage} />
                   <Route exact path="/" component={HomePage} />

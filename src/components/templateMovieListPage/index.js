@@ -7,14 +7,9 @@ const MovieListPageTemplate = ({ movies, title, action }) => {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genre = Number(genreFilter);
+  console.log("movie list :", movies);
   let displayedMovies = movies
     .filter((m) => {
-      console.log(
-        "title : " +
-          m.title +
-          " : " +
-          m.title.toLowerCase().search(nameFilter.toLowerCase())
-      );
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
     .filter((m) => {

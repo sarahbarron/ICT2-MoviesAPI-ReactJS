@@ -3,15 +3,15 @@ import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import AddToFavoritesButton from "../components/buttons/addToFavorites";
 
-const MovieListPage = (props) => {
+const TrendingMoviesPage = (props) => {
   const context = useContext(MoviesContext);
   return (
     <PageTemplate
-      title="All Movies"
-      movies={context.movies}
+      title="Todays Trending Movies"
+      movies={context.trending}
       action={(movie) => <AddToFavoritesButton movie={movie} />}
     />
   );
 };
 
-export default MovieListPage;
+export default TrendingMoviesPage;

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import AddToFavoritesButton from "../components/buttons/addToFavorites";
 
 const TrendingMoviesPage = (props) => {
   const context = useContext(MoviesContext);
+
   return (
     <PageTemplate
       title="Todays Trending Movies"

@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.js";
+import $ from "jquery";
+import "popper.js";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
 import FavoriteMoviesPage from "./pages/favoritesMoviesPage";
@@ -20,11 +23,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <div id="background-img" className="jumbotron">
-          <SiteHeader /> {/* New Header  */}
-          <div className="container-fluid">
-            <MoviesContextProvider>
-              <GenresContextProvider>
+        <GenresContextProvider>
+          <div id="background-img" className="jumbotron">
+            <SiteHeader /> {/* New Header  */}
+            <div className="container-fluid">
+              <MoviesContextProvider>
                 <Switch>
                   <Route path="/authenticate" component={AuthenticationPage} />
                   <PrivateRoute
@@ -55,10 +58,10 @@ const App = () => {
 
                   <Redirect from="*" to="/" />
                 </Switch>
-              </GenresContextProvider>
-            </MoviesContextProvider>
+              </MoviesContextProvider>
+            </div>
           </div>
-        </div>
+        </GenresContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   );

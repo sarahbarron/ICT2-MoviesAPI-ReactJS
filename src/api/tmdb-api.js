@@ -8,7 +8,7 @@ export const getMovies = () => {
 
 export const getTrendingMovies = async () => {
   const fetchResponse = await fetch(
-    `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=1`
+    `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=2`
   );
   const res = await fetchResponse.json();
   const json = res.results;

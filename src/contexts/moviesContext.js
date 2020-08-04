@@ -21,6 +21,7 @@ const reducer = (state, action) => {
         upcoming: [...action.payload.upcoming],
         favorites: [],
       };
+
     case "add-review":
       return {
         movies: [...state.movies],
@@ -52,20 +53,14 @@ const MoviesContextProvider = (props) => {
     dispatch({ type: "add-review", payload: { movie, review } });
   };
 
-  // const async trending = () =>
-  // {
-  //   const trending = await getTrendingMovies();
-  //   dispatch({ type: "trending", payload: {trending}});
-  // };
-
   useEffect(() => {
     async function loadMovies() {
       const trending = await getTrendingMovies();
-      console.log("trending: ", trending);
+
       const movies = await getMovies();
-      console.log("movies: ", movies);
+
       const upcoming = await getUpcomingMovies();
-      console.log("upcoming movies: ", upcoming);
+
       dispatch({
         type: "load-movies",
         payload: { upcoming, trending, movies },

@@ -4,9 +4,12 @@ import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./siteHeader.css";
 import { AuthContext } from "../../contexts/authContext";
+import { GenresContext } from "../../contexts/genresContext";
 
 const SiteHeader = () => {
   const context = useContext(AuthContext);
+  const genresContext = useContext(GenresContext);
+  console.log(genresContext.genres);
   let links;
 
   //  if the user is not authenticated only have a link to sign-in/registration
@@ -41,6 +44,39 @@ const SiteHeader = () => {
           </Link>
         </li>
 
+        <li className="nav-item dropdown">
+          <Link
+            className="nav-link dropdown-toggle text-white"
+            to="#"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Genres
+          </Link>
+          <div
+            className="dropdown-menu"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            {genresContext.genres.map((genre) => {
+              return (
+                <Link
+                  key={genre.id}
+                  className="dropdown-item"
+                  to={`/movies/genres/${genre.id}`}
+                >
+                  {genre.name}
+                </Link>
+              );
+            })}
+
+            <Link className="dropdown-item" to="#">
+              Action
+            </Link>
+          </div>
+        </li>
+
         <li className="nav-item">
           <Link className="nav-link text-white" onClick={context.logout} to="/">
             Logout
@@ -71,14 +107,16 @@ const SiteHeader = () => {
         size="3x"
       />
       <nav className="navbar navbar-expand ">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/">
-              Home
-            </Link>
-          </li>
-          {links}
-        </ul>
+        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/">
+                Home
+              </Link>
+            </li>
+            {links}
+          </ul>
+        </div>
       </nav>
     </nav>
   );

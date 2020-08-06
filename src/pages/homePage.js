@@ -9,7 +9,9 @@ const MovieListPage = (props) => {
     <PageTemplate
       title="All Movies"
       movies={context.movies}
-      action={(movie) => <AddToFavoritesButton movie={movie} />}
+      action={(movie) => (
+        <AddToFavoritesButton movie={movie} movieGroup="movies" />
+      )}
     />
   );
 };

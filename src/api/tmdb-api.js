@@ -40,6 +40,14 @@ export const getGenres = () => {
     .then((json) => json.genres);
 };
 
+export const getGenreMovies = (id) => {
+  return fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`
+  )
+    .then((res) => res.json())
+    .then((json) => json.results);
+};
+
 export const getMovieReviews = (id) => {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`

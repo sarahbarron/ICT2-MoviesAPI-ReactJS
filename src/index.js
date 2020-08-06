@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.js";
-import $ from "jquery";
 import "popper.js";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
@@ -15,6 +14,7 @@ import GenresContextProvider from "./contexts/genresContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import TrendingMoviesPage from "./pages/trendingMoviesPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
+import GenreMoviesPage from "./pages/genreMoviesPage";
 import AuthenticationPage from "./pages/authenticationPage";
 import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from "./routes/privateRoute";
@@ -52,6 +52,10 @@ const App = () => {
                   <PrivateRoute
                     path="/upcoming"
                     component={UpcomingMoviesPage}
+                  />
+                  <PrivateRoute
+                    path="/movies/genres/:id"
+                    component={GenreMoviesPage}
                   />
                   <PrivateRoute path="/movies/:id" component={MoviePage} />
                   <Route exact path="/" component={HomePage} />

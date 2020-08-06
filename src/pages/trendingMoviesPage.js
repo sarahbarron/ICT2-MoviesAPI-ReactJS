@@ -9,9 +9,7 @@ const TrendingMoviesPage = (props) => {
     <PageTemplate
       title="Todays Trending Movies"
       movies={context.trending}
-      action={(movie) => (
-        <AddToFavoritesButton movie={movie} movieGroup="trending" />
-      )}
+      action={(movie) => <AddToFavoritesButton movie={movie} />}
     />
   );
 };

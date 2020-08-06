@@ -4,31 +4,38 @@ import {
   getTrendingMovies,
   getUpcomingMovies,
 } from "../api/tmdb-api";
-// import useGenre from "../hooks/useGenre";
 export const MoviesContext = createContext(null);
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "add-favorite":
+      // if the film is in the trending movies remove it
       if (action.payload.trendingmovie) {
         state.trending = state.trending.filter(
           (m) => m.id !== action.payload.trendingmovie.id
         );
       }
+      // if the film is in the home page movies remove it
       if (action.payload.movie) {
         state.movies = state.movies.filter(
           (m) => m.id !== action.payload.movie.id
         );
       }
+      // if the film is in the upcoming movies remove it
       if (action.payload.upcomingmovie) {
         state.upcoming = state.upcoming.filter(
           (m) => m.id !== action.payload.upcomingmovie.id
         );
       }
+      // if the film is in the genre movies remove it
       if (action.payload.genremovie) {
         state.genremovies = state.genremovies.filter(
           (m) => m.id !== action.payload.genremovie.id
         );
+      }
+      // if the film is not already in the favorites page add it
+      if (action.payload.favindex < 0) {
+        state.favorites = [...state.favorites, action.payload.favmovie];
       }
 
       return {
@@ -36,56 +43,7 @@ const reducer = (state, action) => {
         upcoming: [...state.upcoming],
         movies: [...state.movies],
         genremovies: [...state.genremovies],
-        // upcoming: [
-        //   state.upcoming.filter(
-        //     (m) => m.id !== action.payload.upcomingmovie.id
-        //   ),
-        // ],
-        // genremovies: [
-        //   state.genremovies.filter(
-        //     (m) => m.id !== action.payload.genremovie.id
-        //   ),
-        // ],
-        // movies: [state.movies.filter((m) => m.id !== action.payload.movie.id)],
-        favorites: [...state.favorites, action.payload.favmovie],
-      };
-    case "add-favorite-movies":
-      return {
-        trending: [...state.trending],
-        upcoming: [...state.upcoming],
-        genremovies: [...state.genremovies],
-        movies: [state.movies.filter((m) => m.id !== action.payload.movie.id)],
-        favorites: [...state.favorites, action.payload.movie],
-      };
-    case "add-favorite-trending":
-      return {
-        upcoming: [...state.upcoming],
-        movies: [...state.movies],
-        genremovies: [...state.genremovies],
-        trending: state.trending.filter(
-          (m) => m.id !== action.payload.movie.id
-        ),
-        favorites: [...state.favorites, action.payload.movie],
-      };
-    case "add-favorite-upcoming":
-      return {
-        trending: [...state.trending],
-        movies: [...state.movies],
-        genremovies: [...state.genremovies],
-        upcoming: state.upcoming.filter(
-          (m) => m.id !== action.payload.movie.id
-        ),
-        favorites: [...state.favorites, action.payload.movie],
-      };
-    case "add-favorite-genre":
-      return {
-        trending: [...state.trending],
-        movies: [...state.movies],
-        upcoming: [...state.genremovies],
-        genremovies: state.genremovies.filter(
-          (m) => m.id !== action.payload.movie.id
-        ),
-        favorites: [...state.favorites, action.payload.movie],
+        favorites: [...state.favorites],
       };
     case "load-movies":
       return {
@@ -128,6 +86,8 @@ const MoviesContextProvider = (props) => {
   });
 
   const addToFavorites = (movieId) => {
+    // Get the array index in any of the states if the film appears in it
+    const favindex = state.favorites.map((m) => m.id).indexOf(movieId);
     const movieindex = state.movies.map((m) => m.id).indexOf(movieId);
     const trendingindex = state.trending.map((m) => m.id).indexOf(movieId);
     const upcomingindex = state.upcoming.map((m) => m.id).indexOf(movieId);
@@ -135,6 +95,7 @@ const MoviesContextProvider = (props) => {
       .map((m) => m.id)
       .indexOf(movieId);
     let favmovie = {};
+    // get the favorite movie just once from the first state array it appears in
     if (movieindex >= 0) {
       favmovie = state.movies[movieindex];
     } else if (trendingindex >= 0) {
@@ -145,42 +106,21 @@ const MoviesContextProvider = (props) => {
       favmovie = state.genremovies[genremoviesindex];
     }
 
+    // return the movie if it appears in the array or
+    // undefined if it doesn't
+    // also return the favorite movie and index if it appears in the
+    // favorite movies array otherwise return -1
     dispatch({
       type: "add-favorite",
       payload: {
         favmovie: favmovie,
+        favindex: favindex,
         movie: state.movies[movieindex],
         trendingmovie: state.trending[trendingindex],
         upcomingmovie: state.upcoming[upcomingindex],
         genremovie: state.genremovies[genremoviesindex],
       },
     });
-
-    // if (movieGroup === "movies") {
-    //   const index = state.movies.map((m) => m.id).indexOf(movieId);
-    //   dispatch({
-    //     type: "add-favorite-movies",
-    //     payload: { movie: state.movies[index] },
-    //   });
-    // } else if (movieGroup === "trending") {
-    //   const index = state.trending.map((m) => m.id).indexOf(movieId);
-    //   dispatch({
-    //     type: "add-favorite-trending",
-    //     payload: { movie: state.trending[index] },
-    //   });
-    // } else if (movieGroup === "upcoming") {
-    //   const index = state.upcoming.map((m) => m.id).indexOf(movieId);
-    //   dispatch({
-    //     type: "add-favorite-upcoming",
-    //     payload: { movie: state.upcoming[index] },
-    //   });
-    // } else if (movieGroup === "genre") {
-    //   const index = state.genremovies.map((m) => m.id).indexOf(movieId);
-    //   dispatch({
-    //     type: "add-favorite-genre",
-    //     payload: { movie: state.genremovies[index] },
-    //   });
-    // }
   };
 
   const addReview = (movie, review) => {

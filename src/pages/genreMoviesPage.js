@@ -14,9 +14,7 @@ const GenreMoviesPage = (props) => {
         <PageTemplate
           title="All Movies"
           movies={movies}
-          action={(movie) => (
-            <AddToFavoritesButton movie={movie} movieGroup={movieGroup} />
-          )}
+          action={(movie) => <AddToFavoritesButton movie={movie} />}
         />
       ) : (
         <p>Waiting for movie details</p>

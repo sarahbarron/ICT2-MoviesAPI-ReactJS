@@ -9,9 +9,7 @@ const UpcomingMoviesPage = (props) => {
     <PageTemplate
       title="Upcoming Movies"
       movies={context.upcoming}
-      action={(movie) => (
-        <AddToFavoritesButton movie={movie} movieGroup="upcoming" />
-      )}
+      action={(movie) => <AddToFavoritesButton movie={movie} />}
     />
   );
 };

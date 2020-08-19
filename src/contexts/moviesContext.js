@@ -3,6 +3,7 @@ import {
   getMovies,
   getTrendingMovies,
   getUpcomingMovies,
+  getSearchMovies,
 } from "../api/tmdb-api";
 export const MoviesContext = createContext(null);
 
@@ -33,6 +34,12 @@ const reducer = (state, action) => {
           (m) => m.id !== action.payload.genremovie.id
         );
       }
+      // if the film is in the genre movies remove it
+      if (action.payload.search) {
+        state.search = state.search.filter(
+          (m) => m.id !== action.payload.search.id
+        );
+      }
       // if the film is not already in the favorites page add it
       if (action.payload.favindex < 0) {
         state.favorites = [...state.favorites, action.payload.favmovie];
@@ -44,6 +51,7 @@ const reducer = (state, action) => {
         movies: [...state.movies],
         genremovies: [...state.genremovies],
         favorites: [...state.favorites],
+        search: [...state.search],
       };
     case "load-movies":
       return {
@@ -51,12 +59,17 @@ const reducer = (state, action) => {
         trending: [...action.payload.trending],
         upcoming: [...action.payload.upcoming],
         genremovies: [...state.genremovies],
+        search: [...state.search],
         favorites: [],
       };
 
     case "add-review":
       return {
         movies: [...state.movies],
+        trending: [...state.trending],
+        upcoming: [...state.upcoming],
+        search: [...state.search],
+        genremovies: [...state.genremovies],
         favorites: [
           ...state.favorites.filter((m) => m.id !== action.payload.movie.id),
           { ...action.payload.movie, review: action.payload.review },
@@ -69,6 +82,16 @@ const reducer = (state, action) => {
         trending: [...state.trending],
         upcoming: [...state.upcoming],
         favorites: [...state.favorites],
+        search: [...state.search],
+      };
+    case "load-search-movies":
+      return {
+        genremovies: [...state.genremovies],
+        movies: [...state.movies],
+        trending: [...state.trending],
+        upcoming: [...state.upcoming],
+        favorites: [...state.favorites],
+        search: [...action.payload.movies],
       };
       break;
     default:
@@ -83,6 +106,7 @@ const MoviesContextProvider = (props) => {
     trending: [],
     upcoming: [],
     genremovies: [],
+    search: [],
   });
 
   const addToFavorites = (movieId) => {
@@ -91,6 +115,9 @@ const MoviesContextProvider = (props) => {
     const movieindex = state.movies.map((m) => m.id).indexOf(movieId);
     const trendingindex = state.trending.map((m) => m.id).indexOf(movieId);
     const upcomingindex = state.upcoming.map((m) => m.id).indexOf(movieId);
+    const searchindex = state.search.map((m) => m.id).indexOf(movieId);
+    console.log("search movie id:", movieId);
+    console.log("search Index: ", searchindex);
     const genremoviesindex = state.genremovies
       .map((m) => m.id)
       .indexOf(movieId);
@@ -104,6 +131,8 @@ const MoviesContextProvider = (props) => {
       favmovie = state.upcoming[upcomingindex];
     } else if (genremoviesindex >= 0) {
       favmovie = state.genremovies[genremoviesindex];
+    } else if (searchindex >= 0) {
+      favmovie = state.search[searchindex];
     }
 
     // return the movie if it appears in the array or
@@ -119,6 +148,7 @@ const MoviesContextProvider = (props) => {
         trendingmovie: state.trending[trendingindex],
         upcomingmovie: state.upcoming[upcomingindex],
         genremovie: state.genremovies[genremoviesindex],
+        search: state.search[searchindex],
       },
     });
   };
@@ -129,6 +159,14 @@ const MoviesContextProvider = (props) => {
 
   const loadGenreMovies = (movies) => {
     dispatch({ type: "load-genre-movies", payload: { movies } });
+  };
+
+  const loadSearchMovies = (input) => {
+    async function loadSearchResults(input) {
+      const movies = await getSearchMovies(input);
+      dispatch({ type: "load-search-movies", payload: { movies } });
+    }
+    loadSearchResults(input);
   };
 
   useEffect(() => {
@@ -152,9 +190,11 @@ const MoviesContextProvider = (props) => {
         trending: state.trending,
         upcoming: state.upcoming,
         genremovies: state.genremovies,
+        search: state.search,
         addToFavorites: addToFavorites,
         addReview: addReview,
         loadGenreMovies: loadGenreMovies,
+        loadSearchMovies: loadSearchMovies,
       }}
     >
       {props.children}

@@ -6,7 +6,6 @@ import useGenre from "../hooks/useGenre";
 const GenreMoviesPage = (props) => {
   const { id } = props.match.params;
   const [movies] = useGenre(id);
-  const movieGroup = "genre";
 
   return (
     <>

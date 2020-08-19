@@ -55,3 +55,11 @@ export const getMovieReviews = (id) => {
     .then((res) => res.json())
     .then((json) => json.results);
 };
+
+export const getSearchMovies = (input) => {
+  return fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&query=${input}&page=1&include_adult=false`
+  )
+    .then((res) => res.json())
+    .then((json) => json.results);
+};

@@ -1,0 +1,12 @@
+#full-review {
+  background-color: white;
+  margin-top: 30px;
+  padding: 30px;
+}
+
+#author {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: x-large;
+  padding-bottom: 20px;
+}

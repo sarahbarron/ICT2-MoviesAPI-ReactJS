@@ -15,6 +15,7 @@ import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import TrendingMoviesPage from "./pages/trendingMoviesPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import GenreMoviesPage from "./pages/genreMoviesPage";
+import SearchForMoviePage from "./pages/searchForMoviePage";
 import AuthenticationPage from "./pages/authenticationPage";
 import AuthContextProvider from "./contexts/authContext";
 import PrivateRoute from "./routes/privateRoute";
@@ -30,6 +31,7 @@ const App = () => {
               <MoviesContextProvider>
                 <Switch>
                   <Route path="/authenticate" component={AuthenticationPage} />
+
                   <PrivateRoute
                     exact
                     path="/movies/favorites"
@@ -57,6 +59,7 @@ const App = () => {
                     path="/movies/genres/:id"
                     component={GenreMoviesPage}
                   />
+                  <Route path="/search" component={SearchForMoviePage} />
                   <PrivateRoute path="/movies/:id" component={MoviePage} />
                   <Route exact path="/" component={HomePage} />
 

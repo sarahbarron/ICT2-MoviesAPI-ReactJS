@@ -38,11 +38,6 @@ const SiteHeader = () => {
             Upcoming
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/movies/favorites">
-            Favorites
-          </Link>
-        </li>
 
         <li className="nav-item dropdown">
           <Link
@@ -70,11 +65,17 @@ const SiteHeader = () => {
                 </Link>
               );
             })}
-
-            <Link className="dropdown-item" to="#">
-              Action
-            </Link>
           </div>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link text-white" to="/movies/favorites">
+            Favorites
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link text-white" to="/search">
+            Search
+          </Link>
         </li>
 
         <li className="nav-item">

@@ -8,9 +8,11 @@ export default ({ movie }) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    getMovieReviews(movie.id).then((reviews) => {
-      setReviews(reviews);
-    });
+    if (movie) {
+      getMovieReviews(movie.id).then((reviews) => {
+        setReviews(reviews);
+      });
+    }
   }, []);
 
   return (

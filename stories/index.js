@@ -15,7 +15,11 @@ import ReviewForm from "../src/components/reviewForm";
 import AuthForm from "../src/components/authForm";
 import Login from "../src/components/login";
 import Register from "../src/components/register";
+import SearchForm from "../src/components/searchForm";
 import CustomButton from "../src/components/buttons/customButton";
+import TemplateAuthPage from "../src/components/templateAuthPage";
+import TemplateMovieListPage from "../src/components/templateMovieListPage";
+import TemplateMoviePage from "../src/components/templateMoviePage";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
@@ -111,6 +115,14 @@ storiesOf("Home Page/MovieCard", module)
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
+  .add("movie undefined", () => (
+    <MovieCard
+      movie="undefined"
+      action={(movie) => (
+        <button className="btn w-100 btn-primary">Test</button>
+      )}
+    />
+  ))
   .add("default", () => (
     <MovieCard
       movie={sample}
@@ -137,11 +149,12 @@ storiesOf("Home Page/FilterControls", module)
   ))
   .add("default", () => (
     <FilterControls onUserInput={action("button-click")} numMovies={10} />
-  ));
+  ))
+  .add("no parameters passed", () => <FilterControls />);
 
-storiesOf("Home Page/Header", module).add("default", () => (
-  <MoviesHeader title="All Movies" numMovies={10} />
-));
+storiesOf("Home Page/Header", module)
+  .add("default", () => <MoviesHeader title="All Movies" numMovies={10} />)
+  .add("no parameters passed", () => <MoviesHeader />);
 
 storiesOf("Home Page/MovieList", module)
   .addDecorator((story) => (
@@ -157,17 +170,40 @@ storiesOf("Home Page/MovieList", module)
         )}
       />
     );
+  })
+  .add("empty movies array", () => {
+    const movies = [];
+    return (
+      <MovieList
+        movies={movies}
+        action={(movie) => (
+          <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
+  })
+  .add("undefined movies", () => {
+    const movies = ["undefined"];
+    return (
+      <MovieList
+        movies={movies}
+        action={(movie) => (
+          <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
   });
 
-storiesOf("Movie Details Page/MovieDetails", module).add("default", () => (
-  <MovieDetails movie={sample} />
-));
+storiesOf("Movie Details Page/MovieDetails", module)
+  .add("default", () => <MovieDetails movie={sample} />)
+  .add("no movie passed", () => <MovieDetails />);
 
 storiesOf("Movie Details Page/MovieHeader", module)
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
-  .add("default", () => <MovieHeader movie={sample} />);
+  .add("default", () => <MovieHeader movie={sample} />)
+  .add("no movie passed", () => <MovieHeader />);
 
 storiesOf("Movie Details Page/MovieReviews", module)
   .addDecorator((story) => (
@@ -184,11 +220,15 @@ storiesOf("Movie Details Page/MovieReviews", module)
         )}
       />
     );
+  })
+  .add("No properties passed", () => {
+    return <MovieReviews />;
   });
 
-storiesOf("Movie Review Page/MovieReview", module).add("default", () => (
-  <MovieReview review={sampleReview} />
-));
+storiesOf("Movie Review Page/MovieReview", module)
+  .add("default", () => <MovieReview review={sampleReview} />)
+  .add("No Review", () => <MovieReview />)
+  .add("Undefined Review", () => <MovieReview review={"undefined"} />);
 
 storiesOf("Movie Add Movie Review Page/reviewForm")
   .addDecorator((story) => (
@@ -202,6 +242,9 @@ storiesOf("Authentication/AuthForm")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
+  .add("no parameters passed", () => {
+    return <AuthForm />;
+  })
   .add("login", () => {
     return (
       <AuthForm
@@ -219,6 +262,9 @@ storiesOf("Authentication/AuthForm")
         formType="register"
       />
     );
+  })
+  .add("no parameters passed", () => {
+    return <AuthForm />;
   });
 storiesOf("Authentication/Login")
   .addDecorator((story) => (
@@ -236,19 +282,34 @@ storiesOf("Authentication/Register")
     return <Register />;
   });
 
-storiesOf("Buttons")
+storiesOf("Buttons/custom-button")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
-  .add("custom-button", () => {
+  .add("default", () => {
     return (
       <CustomButton className="btn btn-primary">Custom Button</CustomButton>
     );
   })
-  .add("review-button", () => {
+  .add("No text on button", () => {
+    return <CustomButton className="btn btn-primary" />;
+  });
+
+storiesOf("Buttons/review-button")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
     return <ReviewButton movie={sample}></ReviewButton>;
   })
-  .add("favorite-button", () => {
+  .add("no parameters", () => {
+    return <ReviewButton />;
+  });
+storiesOf("Buttons/favorite-button")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
     return (
       <AddToFavoriteButton
         movie={sample}
@@ -258,4 +319,34 @@ storiesOf("Buttons")
         Favorite
       </AddToFavoriteButton>
     );
+  })
+  .add("no parameters", () => {
+    return <AddToFavoriteButton />;
+  });
+
+storiesOf("Search for Movie Page/searchForm")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return <SearchForm />;
+  });
+
+storiesOf("Template Auth Page")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return <TemplateAuthPage />;
+  });
+
+storiesOf("Template Movie Page")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return <TemplateMoviePage movie={sample} />;
+  })
+  .add("undefined", () => {
+    return <TemplateMoviePage movie={"undefined"} />;
   });

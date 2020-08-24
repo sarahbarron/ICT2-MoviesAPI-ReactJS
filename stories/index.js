@@ -18,8 +18,9 @@ import Register from "../src/components/register";
 import SearchForm from "../src/components/searchForm";
 import CustomButton from "../src/components/buttons/customButton";
 import TemplateAuthPage from "../src/components/templateAuthPage";
-import TemplateMovieListPage from "../src/components/templateMovieListPage";
 import TemplateMoviePage from "../src/components/templateMoviePage";
+import CastCard from "../src/components/castCard";
+import CastList from "../src/components/castList";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
@@ -111,21 +112,32 @@ const sampleReview = {
   content: "this is a sample review to test the MovieReview component",
 };
 
-storiesOf("Home Page/MovieCard", module)
+const sampleCast = {
+  cast_id: 13,
+  character: "Nina",
+  credit_id: "52fe422ac3a36847f8009017",
+  gender: 1,
+  id: 650,
+  name: "Karen Allen",
+  order: 2,
+  profile_path: "/hj1RlVnieS4jp9fKmiSirjKhA0a.jpg",
+};
+
+storiesOf("home page/movieCard", module)
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
-  .add("movie undefined", () => (
+  .add("default", () => (
     <MovieCard
-      movie="undefined"
+      movie={sample}
       action={(movie) => (
         <button className="btn w-100 btn-primary">Test</button>
       )}
     />
   ))
-  .add("default", () => (
+  .add("movie undefined", () => (
     <MovieCard
-      movie={sample}
+      movie="undefined"
       action={(movie) => (
         <button className="btn w-100 btn-primary">Test</button>
       )}
@@ -143,7 +155,7 @@ storiesOf("Home Page/MovieCard", module)
     );
   });
 
-storiesOf("Home Page/FilterControls", module)
+storiesOf("home page/filterControls", module)
   .addDecorator((story) => (
     <GenresContextProvider>{story()}</GenresContextProvider>
   ))
@@ -152,11 +164,11 @@ storiesOf("Home Page/FilterControls", module)
   ))
   .add("no parameters passed", () => <FilterControls />);
 
-storiesOf("Home Page/Header", module)
+storiesOf("home page/headerMovieList", module)
   .add("default", () => <MoviesHeader title="All Movies" numMovies={10} />)
   .add("no parameters passed", () => <MoviesHeader />);
 
-storiesOf("Home Page/MovieList", module)
+storiesOf("home page/movieList", module)
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -183,7 +195,7 @@ storiesOf("Home Page/MovieList", module)
     );
   })
   .add("undefined movies", () => {
-    const movies = ["undefined"];
+    const movies = "undefined";
     return (
       <MovieList
         movies={movies}
@@ -194,18 +206,18 @@ storiesOf("Home Page/MovieList", module)
     );
   });
 
-storiesOf("Movie Details Page/MovieDetails", module)
+storiesOf("movie details page/movieDetails", module)
   .add("default", () => <MovieDetails movie={sample} />)
   .add("no movie passed", () => <MovieDetails />);
 
-storiesOf("Movie Details Page/MovieHeader", module)
+storiesOf("movie details page/movieHeader", module)
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
   .add("default", () => <MovieHeader movie={sample} />)
   .add("no movie passed", () => <MovieHeader />);
 
-storiesOf("Movie Details Page/MovieReviews", module)
+storiesOf("movie details page/movieReviews", module)
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -225,12 +237,12 @@ storiesOf("Movie Details Page/MovieReviews", module)
     return <MovieReviews />;
   });
 
-storiesOf("Movie Review Page/MovieReview", module)
+storiesOf("movie review page/movieReview", module)
   .add("default", () => <MovieReview review={sampleReview} />)
-  .add("No Review", () => <MovieReview />)
-  .add("Undefined Review", () => <MovieReview review={"undefined"} />);
+  .add("no review", () => <MovieReview />)
+  .add("undefined review", () => <MovieReview review={"undefined"} />);
 
-storiesOf("Movie Add Movie Review Page/reviewForm")
+storiesOf("movie add movie review page/reviewForm")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -238,7 +250,7 @@ storiesOf("Movie Add Movie Review Page/reviewForm")
     return <ReviewForm movie={sample} />;
   });
 
-storiesOf("Authentication/AuthForm")
+storiesOf("authentication/authForm")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -266,7 +278,7 @@ storiesOf("Authentication/AuthForm")
   .add("no parameters passed", () => {
     return <AuthForm />;
   });
-storiesOf("Authentication/Login")
+storiesOf("authentication/login")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -274,7 +286,7 @@ storiesOf("Authentication/Login")
     return <Login />;
   });
 
-storiesOf("Authentication/Register")
+storiesOf("authentication/register")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -282,7 +294,7 @@ storiesOf("Authentication/Register")
     return <Register />;
   });
 
-storiesOf("Buttons/custom-button")
+storiesOf("buttons/customButton")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -295,7 +307,7 @@ storiesOf("Buttons/custom-button")
     return <CustomButton className="btn btn-primary" />;
   });
 
-storiesOf("Buttons/review-button")
+storiesOf("buttons/addReview")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -305,7 +317,7 @@ storiesOf("Buttons/review-button")
   .add("no parameters", () => {
     return <ReviewButton />;
   });
-storiesOf("Buttons/favorite-button")
+storiesOf("buttons/addToFavorites")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -324,7 +336,7 @@ storiesOf("Buttons/favorite-button")
     return <AddToFavoriteButton />;
   });
 
-storiesOf("Search for Movie Page/searchForm")
+storiesOf("search for movie page/searchForm")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -332,7 +344,7 @@ storiesOf("Search for Movie Page/searchForm")
     return <SearchForm />;
   });
 
-storiesOf("Template Auth Page")
+storiesOf("template/templateAuthPage")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -340,7 +352,7 @@ storiesOf("Template Auth Page")
     return <TemplateAuthPage />;
   });
 
-storiesOf("Template Movie Page")
+storiesOf("template/templateMoviePage")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
@@ -349,4 +361,58 @@ storiesOf("Template Movie Page")
   })
   .add("undefined", () => {
     return <TemplateMoviePage movie={"undefined"} />;
+  });
+
+storiesOf("cast/castCard")
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return (
+      <CastCard
+        cast={sampleCast}
+        action={(movie) => (
+          <button className="btn w-100 btn-primary">More Details ...</button>
+        )}
+      />
+    );
+  })
+  .add("undefined", () => {
+    return (
+      <CastCard
+        cast={"undefined"}
+        action={(movie) => (
+          <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
+  });
+
+storiesOf("cast/castList", module)
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    const cast = [sampleCast, sampleCast, sampleCast, sampleCast];
+    return (
+      <CastList
+        movie={sample}
+        action={(cast) => (
+          <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
+  })
+  .add("No properties passed", () => {
+    return <CastList />;
+  })
+  .add("cast undefined", () => {
+    return (
+      <CastList
+        movie="undefined"
+        action={(cast) => (
+          <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
   });

@@ -5,7 +5,7 @@ import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MovieCard = ({ movie, action }) => {
-  if (movie.id) {
+  try {
     return (
       <div id="card-column" className="col-sm-3">
         <div className="card card-container  bg-white">
@@ -35,28 +35,9 @@ const MovieCard = ({ movie, action }) => {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div id="card-column" className="col-sm-3">
-        <div className="card card-container  bg-white">
-          <h4 className="card-title ">Error Returning Movie</h4>
-          <img
-            className="card-img-tag center "
-            src={"./film-poster-placeholder.png"}
-          />
-
-          <div className="card-body">
-            <p>
-              <FontAwesomeIcon icon={["fas", "calendar"]} />
-            </p>
-            <p>
-              <FontAwesomeIcon icon={["fas", "star"]} />
-            </p>
-          </div>
-          <div className="card-footer"></div>
-        </div>
-      </div>
-    );
+  } catch (e) {
+    console.log("Unable to return the movie card with details: ", e);
+    return <div className="error-msg">Unable to view Movies at this time</div>;
   }
 };
 

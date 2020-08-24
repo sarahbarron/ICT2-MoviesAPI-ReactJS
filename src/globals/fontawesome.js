@@ -7,6 +7,17 @@ import {
   faHome,
   faCalendar,
   faArrowCircleLeft,
+  faAddressBook,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faStar, faFilm, faVideo, faHome, faCalendar, faArrowCircleLeft);
+library.add(
+  faStar,
+  faFilm,
+  faVideo,
+  faHome,
+  faCalendar,
+  faArrowCircleLeft,
+  faAddressBook,
+  faCog
+);

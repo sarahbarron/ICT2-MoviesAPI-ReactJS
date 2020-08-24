@@ -116,12 +116,12 @@ const MoviesContextProvider = (props) => {
     const trendingindex = state.trending.map((m) => m.id).indexOf(movieId);
     const upcomingindex = state.upcoming.map((m) => m.id).indexOf(movieId);
     const searchindex = state.search.map((m) => m.id).indexOf(movieId);
-    console.log("search movie id:", movieId);
-    console.log("search Index: ", searchindex);
+
     const genremoviesindex = state.genremovies
       .map((m) => m.id)
       .indexOf(movieId);
     let favmovie = {};
+
     // get the favorite movie just once from the first state array it appears in
     if (movieindex >= 0) {
       favmovie = state.movies[movieindex];

@@ -19,12 +19,15 @@ import SearchForm from "../src/components/searchForm";
 import CustomButton from "../src/components/buttons/customButton";
 import TemplateAuthPage from "../src/components/templateAuthPage";
 import TemplateMoviePage from "../src/components/templateMoviePage";
-import CastCard from "../src/components/castCard";
+import TemplateCastPage from "../src/components/templateCastPage";
+// import CastCard from "../src/components/castCard";
 import CastList from "../src/components/castList";
+import CastDetails from "../src/components/castDetails";
+import CastHeader from "../src/components/headerCast";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
-
+import CastContextProvider from "../src/contexts/castContext";
 const sample = {
   adult: false,
   backdrop_path: "/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg",
@@ -121,6 +124,24 @@ const sampleCast = {
   name: "Karen Allen",
   order: 2,
   profile_path: "/hj1RlVnieS4jp9fKmiSirjKhA0a.jpg",
+};
+
+const samplePerson = {
+  birthday: "1951-10-05",
+  known_for_department: "Acting",
+  deathday: null,
+  id: 650,
+  name: "Karen Allen",
+  also_known_as: ["Karen Jane Allen "],
+  gender: 1,
+  biography:
+    "From Wikipedia, the free encyclopedia.\n\nKaren Jane Allen (born October 5, 1951) is an American actress best known for her role as Marion Ravenwood in Raiders of the Lost Ark (1981) and Indiana Jones and the Kingdom of the Crystal Skull (2008).[1] Allen has also had roles in films including National Lampoon's Animal House (1978), The Wanderers (1979), Cruising (1980), Starman (1984), Scrooged (1988), The Sandlot (1993), and Poster Boy (2004).",
+  popularity: 2.294,
+  place_of_birth: "Carrollton, Illinois, USA",
+  profile_path: "/hj1RlVnieS4jp9fKmiSirjKhA0a.jpg",
+  adult: false,
+  imdb_id: "nm0000261",
+  homepage: "http://www.karenallen-fiberarts.com/",
 };
 
 storiesOf("home page/movieCard", module)
@@ -363,56 +384,64 @@ storiesOf("template/templateMoviePage")
     return <TemplateMoviePage movie={"undefined"} />;
   });
 
-storiesOf("cast/castCard")
+storiesOf("template/templateCastPage")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
   .add("default", () => {
-    return (
-      <CastCard
-        cast={sampleCast}
-        action={(movie) => (
-          <button className="btn w-100 btn-primary">More Details ...</button>
-        )}
-      />
-    );
+    return <TemplateCastPage person={samplePerson} />;
   })
   .add("undefined", () => {
-    return (
-      <CastCard
-        cast={"undefined"}
-        action={(movie) => (
-          <button className="btn w-100 btn-primary">Test</button>
-        )}
-      />
-    );
+    return <TemplateCastPage person="undefined" />;
   });
+
+// storiesOf("cast/castCard")
+//   .addDecorator((story) => (
+//     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+//   ))
+//   .add("default", () => {
+//     return (
+//       <CastCard
+//         cast={sampleCast}
+//         action={(movie) => (
+//           <button className="btn w-100 btn-primary">More Details ...</button>
+//         )}
+//       />
+//     );
+//   })
+//   .add("undefined", () => {
+//     return (
+//       <CastCard
+//         cast={"undefined"}
+//         action={(movie) => (
+//           <button className="btn w-100 btn-primary">Test</button>
+//         )}
+//       />
+//     );
+//   });
 
 storiesOf("cast/castList", module)
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
   .add("default", () => {
-    const cast = [sampleCast, sampleCast, sampleCast, sampleCast];
-    return (
-      <CastList
-        movie={sample}
-        action={(cast) => (
-          <button className="btn w-100 btn-primary">Test</button>
-        )}
-      />
-    );
+    const cast = [sampleCast, sampleCast, sampleCast];
+    return <CastList movie={sample} />;
   })
   .add("No properties passed", () => {
     return <CastList />;
   })
   .add("cast undefined", () => {
-    return (
-      <CastList
-        movie="undefined"
-        action={(cast) => (
-          <button className="btn w-100 btn-primary">Test</button>
-        )}
-      />
-    );
+    return <CastList movie="undefined" />;
   });
+
+storiesOf("cast/castDetails", module)
+  .add("default", () => <CastDetails person={samplePerson} />)
+  .add("no movie passed", () => <CastDetails />);
+
+storiesOf("cast/castHeader", module)
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => <CastHeader person={samplePerson} />)
+  .add("no movie passed", () => <CastHeader />);

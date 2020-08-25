@@ -72,3 +72,11 @@ export const getCast = async (id) => {
   const json = res.cast;
   return json;
 };
+
+export const getPerson = async (id) => {
+  const fetchResponse = await fetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+  );
+  const res = await fetchResponse.json();
+  return res;
+};

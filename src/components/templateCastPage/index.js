@@ -1,22 +1,21 @@
 import React from "react";
-import MovieHeader from "../headerMovie";
-import "./moviePage.css";
+import CastHeader from "../headerCast";
 
-const TemplateMoviePage = ({ movie, children }) => {
+const TemplateCastPage = ({ person, children }) => {
   try {
     return (
       <>
-        <MovieHeader movie={movie} />
+        <CastHeader person={person} />
         <div className="row">
           <div className="col-3">
             <img
               src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                person.profile_path
+                  ? `https://image.tmdb.org/t/p/w500/${person.profile_path}`
                   : "./film-poster-placeholder.png"
               }
               className="movie"
-              alt={movie.title}
+              alt={person.name}
             />
           </div>
           <div className="col-9">{children}</div>
@@ -33,4 +32,4 @@ const TemplateMoviePage = ({ movie, children }) => {
   }
 };
 
-export default TemplateMoviePage;
+export default TemplateCastPage;

@@ -4,7 +4,7 @@ import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
 import MovieReviews from "../components/movieReviews";
 import useMovie from "../hooks/useMovie";
-
+import CastList from "../components/castList";
 const MoviePage = (props) => {
   const { id } = props.match.params;
   const [movie] = useMovie(id); // NEW
@@ -16,8 +16,8 @@ const MoviePage = (props) => {
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
           </PageTemplate>
-          <div className="row">
-            <div className="col-12 ">
+          <div className="row marg">
+            <div className="col-6 ">
               {!props.history.location.pathname.endsWith("/reviews") ? (
                 <Link
                   className="btn btn-warning btn-block active"
@@ -34,10 +34,32 @@ const MoviePage = (props) => {
                 </Link>
               )}
             </div>
+
+            <div className="col-6 ">
+              {!props.history.location.pathname.endsWith("/cast") ? (
+                <Link
+                  className="btn btn-warning btn-block active"
+                  to={`/movies/${id}/cast`}
+                >
+                  Show Cast
+                </Link>
+              ) : (
+                <Link
+                  className="btn btn-warning btn-block active"
+                  to={`/movies/${id}`}
+                >
+                  Hide Cast
+                </Link>
+              )}
+            </div>
           </div>
           <Route
             path={`/movies/:id/reviews`}
             render={(props) => <MovieReviews movie={movie} {...props} />}
+          />
+          <Route
+            path={`/movies/:id/cast`}
+            render={(props) => <CastList movie={movie} {...props} />}
           />
         </>
       ) : (

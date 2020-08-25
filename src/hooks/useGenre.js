@@ -8,7 +8,6 @@ const useGenre = (id) => {
   }
   useEffect(() => {
     getGenreMovies(id).then((movies) => {
-      console.log("useEffect: ", id + " " + movies);
       context.loadGenreMovies(movies);
     });
   }, [id]);

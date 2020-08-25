@@ -2,7 +2,7 @@ import React from "react";
 import "./movieDetails.css";
 
 export default ({ movie }) => {
-  if (movie) {
+  try {
     return (
       <>
         <div id="movie-details" className="opacity-div">
@@ -66,12 +66,12 @@ export default ({ movie }) => {
         </div>
       </>
     );
-  } else {
+  } catch (e) {
+    console.log("error retrieving details of the movie", e);
     return (
-      <>
-        <h1>Sorry</h1>
-        <p>We seem to be having problems displaying this movie</p>
-      </>
+      <div className="error-msg">
+        We seem to be having problems displaying this movie
+      </div>
     );
   }
 };

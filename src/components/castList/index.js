@@ -1,63 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { getCast } from "../../api/tmdb-api";
 import "./castList.css";
-
+import { getCast } from "../../api/tmdb-api";
+import { CastContext } from "../../contexts/castContext";
+import AddCastFavoritesButton from "../../components/buttons/AddCastFavorites";
+import ViewPersonButton from "../../components/buttons/viewPerson";
 export default ({ movie }) => {
-  const [cast, setCast] = useState([]);
+  const context = useContext(CastContext);
 
   useEffect(() => {
-    async function loadCast() {
-      const cast = await getCast(movie.id);
-      console.log("useEffect getCast: ", cast);
-      setCast(cast);
+    if (movie) {
+      getCast(movie.id).then((cast) => {
+        // setCast(cast);
+        context.loadCast(cast);
+      });
     }
-    loadCast();
   }, []);
-
   try {
-    return (
+    return context.cast !== null ? (
       <div>
         <table className="table table-striped table-bordered table-hover table-dark">
           <thead>
             <tr>
-              <th scope="col"></th>
-              <th scope="col">Character Name</th>
-              <th scope="col">Real Name</th>
-              <th scope="col">Order of Appearance</th>
+              <th scope="col">Image</th>
+              <th scope="col">Details</th>
+              <th scope="col">Links</th>
             </tr>
           </thead>
           <tbody>
-            {cast.map((c) => {
+            {context.cast.map((c) => {
               return (
                 <tr key={c.id}>
                   <td>
                     <img
                       className="img-thumbnail cast-img"
                       alt={c.name}
+                      // external link to add the image of the film if the cast members image is not available
                       src={
                         c.profile_path
                           ? `https://image.tmdb.org/t/p/w500/${c.profile_path}`
-                          : "./film-poster-placeholder.png"
+                          : `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
                       }
                     />
                   </td>
-                  <td>{c.character}</td>
-                  <td>{c.name}</td>
-                  <td>{c.order}</td>
                   <td>
-                    {" "}
-                    <Link
-                      to={{
-                        pathname: `/people/${c.id}`,
-                        state: {
-                          cast: c,
-                          movie: movie,
-                        },
-                      }}
-                    >
-                      More Details ...
-                    </Link>
+                    <p>
+                      <span className="cast-list-details">
+                        Character Name :
+                      </span>
+                      {c.character}
+                      <br />
+                      <br />
+                      <span className="cast-list-details">Actor Name :</span>
+                      {c.name}
+                      <br />
+                      <br />
+                      <span className="cast-list-details">
+                        Appearance Order :
+                      </span>{" "}
+                      {c.order + 1}
+                      <br />
+                      <br />
+                    </p>
+                  </td>
+                  <td>
+                    <ViewPersonButton person={c} />
                   </td>
                 </tr>
               );
@@ -65,6 +72,8 @@ export default ({ movie }) => {
           </tbody>
         </table>
       </div>
+    ) : (
+      <p>Waiting for movie details</p>
     );
   } catch (e) {
     console.log("Error retrieving cast: ", e);

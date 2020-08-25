@@ -1,9 +1,19 @@
 .list-group-item {
-  padding: 2px;
+  padding: 5px;
   margin-top: 5px;
   color: #45575f;
+  min-width: 15%;
+}
+
+.list-group-item:nth-child(1) {
+  font-weight: bolder;
 }
 
 #movie-details {
-  height: 90%;
+  margin-top: 30px;
+  height: 100%;
+}
+
+#movie-details p {
+  padding: 5px;
 }

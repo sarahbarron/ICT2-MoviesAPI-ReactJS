@@ -17,7 +17,9 @@ import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import GenreMoviesPage from "./pages/genreMoviesPage";
 import SearchForMoviePage from "./pages/searchForMoviePage";
 import AuthenticationPage from "./pages/authenticationPage";
+import CastDetailsPage from "./pages/castDetailsPage";
 import AuthContextProvider from "./contexts/authContext";
+import CastContextProvider from "./contexts/castContext";
 import PrivateRoute from "./routes/privateRoute";
 
 const App = () => {
@@ -29,42 +31,51 @@ const App = () => {
             <SiteHeader /> {/* New Header  */}
             <div className="container-fluid">
               <MoviesContextProvider>
-                <Switch>
-                  <Route path="/authenticate" component={AuthenticationPage} />
+                <CastContextProvider>
+                  <Switch>
+                    <Route
+                      path="/authenticate"
+                      component={AuthenticationPage}
+                    />
 
-                  <PrivateRoute
-                    exact
-                    path="/movies/favorites"
-                    component={FavoriteMoviesPage}
-                  />
-                  <PrivateRoute
-                    exact
-                    path="/reviews/form"
-                    component={AddMovieReviewPage}
-                  />
-                  <PrivateRoute
-                    path="/reviews/:id"
-                    component={MovieReviewPage}
-                  />
+                    <PrivateRoute
+                      exact
+                      path="/movies/favorites"
+                      component={FavoriteMoviesPage}
+                    />
+                    <PrivateRoute
+                      exact
+                      path="/reviews/form"
+                      component={AddMovieReviewPage}
+                    />
+                    <PrivateRoute
+                      path="/reviews/:id"
+                      component={MovieReviewPage}
+                    />
 
-                  <PrivateRoute
-                    path="/trending"
-                    component={TrendingMoviesPage}
-                  />
-                  <PrivateRoute
-                    path="/upcoming"
-                    component={UpcomingMoviesPage}
-                  />
-                  <PrivateRoute
-                    path="/movies/genres/:id"
-                    component={GenreMoviesPage}
-                  />
-                  <Route path="/search" component={SearchForMoviePage} />
-                  <PrivateRoute path="/movies/:id" component={MoviePage} />
-                  <Route exact path="/" component={HomePage} />
+                    <PrivateRoute
+                      path="/trending"
+                      component={TrendingMoviesPage}
+                    />
+                    <PrivateRoute
+                      path="/upcoming"
+                      component={UpcomingMoviesPage}
+                    />
+                    <PrivateRoute
+                      path="/movies/genres/:id"
+                      component={GenreMoviesPage}
+                    />
+                    <Route path="/search" component={SearchForMoviePage} />
+                    <PrivateRoute path="/movies/:id" component={MoviePage} />
+                    <PrivateRoute
+                      path="/person/:id"
+                      component={CastDetailsPage}
+                    />
+                    <Route exact path="/" component={HomePage} />
 
-                  <Redirect from="*" to="/" />
-                </Switch>
+                    <Redirect from="*" to="/" />
+                  </Switch>
+                </CastContextProvider>
               </MoviesContextProvider>
             </div>
           </div>

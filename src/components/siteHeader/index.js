@@ -9,7 +9,6 @@ import { GenresContext } from "../../contexts/genresContext";
 const SiteHeader = () => {
   const context = useContext(AuthContext);
   const genresContext = useContext(GenresContext);
-  console.log(genresContext.genres);
   let links;
 
   //  if the user is not authenticated only have a link to sign-in/registration

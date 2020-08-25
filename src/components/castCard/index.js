@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const MovieCard = ({ cast, action }) => {
+const CastCard = ({ key, cast, action }) => {
   try {
     return (
       <div id="card-column" className="col-sm-3">
@@ -40,4 +40,4 @@ const MovieCard = ({ cast, action }) => {
   }
 };
 
-export default MovieCard;
+export default CastCard;

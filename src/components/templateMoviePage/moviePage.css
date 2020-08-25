@@ -1,6 +1,10 @@
 img.movie {
   float: left;
   width: 100%;
-  height: 90%;
+  max-height: 500px;
+  margin-top: 30px;
+}
+
+.marg {
   margin-top: 30px;
 }

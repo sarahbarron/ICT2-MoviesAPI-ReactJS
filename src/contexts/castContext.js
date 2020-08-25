@@ -1,5 +1,4 @@
-import React, { useEffect, createContext, useReducer } from "react";
-import { getCast } from "../api/tmdb-api";
+import React, { createContext, useReducer } from "react";
 
 export const CastContext = createContext(null);
 
@@ -30,22 +29,22 @@ const reducer = (state, action) => {
   }
 };
 
-const MoviesContextProvider = (props) => {
+const CastContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, {
     cast: [],
     castfavorites: [],
   });
 
-  const addToCastFavorites = (castId) => {
+  const addToCastFavorites = (id) => {
     // Get the array index in any of the states if the cast member appears in it
-    const favindex = state.castfavorites.map((m) => m.id).indexOf(castId);
-    const castindex = state.cast.map((m) => m.id).indexOf(castId);
+    const favindex = state.castfavorites.map((m) => m.id).indexOf(id);
+    const castindex = state.cast.map((m) => m.id).indexOf(id);
 
     // return the cast object and the favindex value which should be either -1
     // or a whole number if it is -1 - the cast member is already in the castfavorites array
     // otherwise the cast member is not in the array already
     dispatch({
-      type: "add-to-cast-favorite",
+      type: "add-cast-favorite",
       payload: {
         favindex: favindex,
         cast: state.cast[castindex],
@@ -53,16 +52,9 @@ const MoviesContextProvider = (props) => {
     });
   };
 
-  useEffect(() => {
-    async function loadMovies() {
-      const cast = await getCast();
-      dispatch({
-        type: "load-cast",
-        payload: { cast },
-      });
-    }
-    loadMovies();
-  }, []);
+  const loadCast = (cast) => {
+    dispatch({ type: "load-cast", payload: { cast } });
+  };
 
   return (
     <CastContext.Provider
@@ -70,6 +62,7 @@ const MoviesContextProvider = (props) => {
         cast: state.cast,
         castfavorites: state.castfavorites,
         addToCastFavorites: addToCastFavorites,
+        loadCast: loadCast,
       }}
     >
       {props.children}

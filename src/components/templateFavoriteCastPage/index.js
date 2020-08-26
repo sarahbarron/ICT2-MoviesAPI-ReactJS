@@ -3,11 +3,11 @@ import HeaderCastList from "../headerCastList";
 import CastCardList from "../castCardList";
 import FilterCastControls from "../filterCastControls";
 
-const CastListPageTemplate = ({ cast, title, action }) => {
+const FavoriteCastTemplate = ({ cast, title, action }) => {
   const [nameFilter, setNameFilter] = useState("");
 
   let displayedCast = cast.filter((m) => {
-    return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+    return m.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
   });
 
   const handleChange = (type, value) => {
@@ -26,4 +26,4 @@ const CastListPageTemplate = ({ cast, title, action }) => {
   );
 };
 
-export default CastListPageTemplate;
+export default FavoriteCastTemplate;

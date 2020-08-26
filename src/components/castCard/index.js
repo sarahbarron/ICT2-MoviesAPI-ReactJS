@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CastCard = ({ key, cast, action }) => {
+const CastCard = ({ cast, action }) => {
   try {
     return (
       <div id="card-column" className="col-sm-3">
@@ -20,15 +20,7 @@ const CastCard = ({ key, cast, action }) => {
             />
           </Link>
           <div className="card-body">
-            <h4 className="card-title ">{cast.character}</h4>
-            <p>
-              <FontAwesomeIcon icon={["fas", "address-book"]} />
-              <span> {cast.name}</span>
-            </p>
-            <p>
-              <FontAwesomeIcon icon={["fas", "cog"]} />
-              <span>{cast.order}</span>
-            </p>
+            <h4 className="card-title ">{cast.name}</h4>
           </div>
           <div className="card-footer">{action(cast)}</div>
         </div>

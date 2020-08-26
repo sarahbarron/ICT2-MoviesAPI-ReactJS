@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import "./castList.css";
 import { getCast } from "../../api/tmdb-api";
 import { CastContext } from "../../contexts/castContext";
-import AddCastFavoritesButton from "../../components/buttons/AddCastFavorites";
 import ViewPersonButton from "../../components/buttons/viewPerson";
+
 export default ({ movie }) => {
   const context = useContext(CastContext);
 
   useEffect(() => {
     if (movie) {
       getCast(movie.id).then((cast) => {
-        // setCast(cast);
         context.loadCast(cast);
       });
     }

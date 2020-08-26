@@ -1,7 +1,7 @@
 import React from "react";
 import CastCard from "../castCard";
 
-const CastList = ({ cast, action }) => {
+const CastCardList = ({ cast, action }) => {
   try {
     const castCards = cast.map((m) => (
       <CastCard key={m.id} cast={m} action={action} />
@@ -13,4 +13,4 @@ const CastList = ({ cast, action }) => {
   }
 };
 
-export default CastList;
+export default CastCardList;

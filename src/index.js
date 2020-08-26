@@ -18,6 +18,7 @@ import GenreMoviesPage from "./pages/genreMoviesPage";
 import SearchForMoviePage from "./pages/searchForMoviePage";
 import AuthenticationPage from "./pages/authenticationPage";
 import CastDetailsPage from "./pages/castDetailsPage";
+import FavoriteCastPage from "./pages/favoriteCastPage";
 import AuthContextProvider from "./contexts/authContext";
 import CastContextProvider from "./contexts/castContext";
 import PrivateRoute from "./routes/privateRoute";
@@ -45,32 +46,25 @@ const App = () => {
                     />
                     <PrivateRoute
                       exact
+                      path="/cast/favorites"
+                      component={FavoriteCastPage}
+                    />
+                    <PrivateRoute
+                      exact
                       path="/reviews/form"
                       component={AddMovieReviewPage}
                     />
-                    <PrivateRoute
-                      path="/reviews/:id"
-                      component={MovieReviewPage}
-                    />
+                    <Route path="/reviews/:id" component={MovieReviewPage} />
 
-                    <PrivateRoute
-                      path="/trending"
-                      component={TrendingMoviesPage}
-                    />
-                    <PrivateRoute
-                      path="/upcoming"
-                      component={UpcomingMoviesPage}
-                    />
+                    <Route path="/trending" component={TrendingMoviesPage} />
+                    <Route path="/upcoming" component={UpcomingMoviesPage} />
                     <PrivateRoute
                       path="/movies/genres/:id"
                       component={GenreMoviesPage}
                     />
                     <Route path="/search" component={SearchForMoviePage} />
-                    <PrivateRoute path="/movies/:id" component={MoviePage} />
-                    <PrivateRoute
-                      path="/person/:id"
-                      component={CastDetailsPage}
-                    />
+                    <Route path="/movies/:id" component={MoviePage} />
+                    <Route path="/person/:id" component={CastDetailsPage} />
                     <Route exact path="/" component={HomePage} />
 
                     <Redirect from="*" to="/" />

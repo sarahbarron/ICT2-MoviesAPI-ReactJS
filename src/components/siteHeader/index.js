@@ -28,56 +28,6 @@ const SiteHeader = () => {
     links = (
       <>
         <li className="nav-item">
-          <Link className="nav-link text-white" to="/trending">
-            Trending
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/upcoming">
-            Upcoming
-          </Link>
-        </li>
-
-        <li className="nav-item dropdown">
-          <Link
-            className="nav-link dropdown-toggle text-white"
-            to="#"
-            id="navbarDropdownMenuLink"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Genres
-          </Link>
-          <div
-            className="dropdown-menu"
-            aria-labelledby="navbarDropdownMenuLink"
-          >
-            {genresContext.genres.map((genre) => {
-              return (
-                <Link
-                  key={genre.id}
-                  className="dropdown-item"
-                  to={`/movies/genres/${genre.id}`}
-                >
-                  {genre.name}
-                </Link>
-              );
-            })}
-          </div>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/movies/favorites">
-            Favorites
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white" to="/search">
-            Search
-          </Link>
-        </li>
-
-        <li className="nav-item">
           <Link className="nav-link text-white" onClick={context.logout} to="/">
             Logout
           </Link>
@@ -112,6 +62,60 @@ const SiteHeader = () => {
             <li className="nav-item">
               <Link className="nav-link text-white" to="/">
                 Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/trending">
+                Trending
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/upcoming">
+                Upcoming
+              </Link>
+            </li>
+
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle text-white"
+                to="#"
+                id="navbarDropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Genres
+              </Link>
+              <div
+                className="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                {genresContext.genres.map((genre) => {
+                  return (
+                    <Link
+                      key={genre.id}
+                      className="dropdown-item"
+                      to={`/movies/genres/${genre.id}`}
+                    >
+                      {genre.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/search">
+                Search
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/movies/favorites">
+                Favorite Movies
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/cast/favorites">
+                Favorite Cast
               </Link>
             </li>
             {links}

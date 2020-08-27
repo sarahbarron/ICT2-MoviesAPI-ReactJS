@@ -148,16 +148,11 @@ const AuthForm = ({ title, buttonLabel, formType }) => {
           onClick={(event) => {
             handleSubmit(event, email, password);
           }}
-          className="btn btn-primary space-between"
         >
           {buttonLabel}
         </CustomButton>
         {/* Button for register/login with google using firebase  */}
-        <CustomButton
-          type="button"
-          onClick={onSubmitGoogle}
-          className="btn btn-primary space-between"
-        >
+        <CustomButton type="button" onClick={onSubmitGoogle}>
           Sign In With Google
         </CustomButton>
 

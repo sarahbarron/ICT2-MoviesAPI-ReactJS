@@ -11,7 +11,6 @@ const FavoriteMoviesPage = (props) => {
       title={"Favorite Movies"}
       action={(movie) => (
         <CustomLinkButton
-          className="btn w-100 btn-warning "
           to={{
             pathname: `/reviews/form`,
             state: {

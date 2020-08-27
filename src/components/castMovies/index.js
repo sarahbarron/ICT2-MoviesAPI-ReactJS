@@ -17,11 +17,8 @@ export default ({ person }) => {
   return (
     <MovieList
       movies={castmovies}
-      // action={(movie) => <MovieDetailsButton movie={movie} />}
-
       action={(movie) => (
         <CustomLinkButton
-          className="btn w-100 btn-warning "
           to={{
             pathname: `/movies/${movie.id}`,
             state: {

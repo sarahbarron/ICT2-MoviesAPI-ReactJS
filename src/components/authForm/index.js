@@ -65,7 +65,7 @@ const AuthForm = ({ title, buttonLabel, formType }) => {
     try {
       const { user } = await signInWithGoogle();
 
-      if (user !== null || user !== "undefined") {
+      if (user !== null || user !== undefined) {
         authenticated(user);
       } else context.setUser(null);
       //    if the user is not stored in the database store it

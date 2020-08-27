@@ -1,7 +1,7 @@
 import React from "react";
 import AuthForm from "../authForm/index";
 
-const Register = () => {
+const Register = (props) => {
   return (
     <div>
       <AuthForm

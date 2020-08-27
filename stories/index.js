@@ -9,7 +9,7 @@ import MovieList from "../src/components/movieList";
 import MovieDetails from "../src/components/movieDetails";
 import MovieHeader from "../src/components/headerMovie";
 import AddToFavoriteButton from "../src/components/buttons/addToFavorites";
-import ReviewButton from "../src/components/buttons/addReview";
+
 import MovieReview from "../src/components/movieReview";
 import MovieReviews from "../src/components/movieReviews";
 import ReviewForm from "../src/components/reviewForm";
@@ -30,10 +30,12 @@ import AddCastFavoriteButton from "../src/components/buttons/AddCastFavorites";
 import FilterCastControls from "../src/components/filterCastControls";
 import HeaderCastList from "../src/components/headerCastList";
 import ViewPersonButton from "../src/components/buttons/viewPerson";
+import CastMovies from "../src/components/castMovies";
+import CustomLinkButton from "../src/components/buttons/customLinkButton";
 import { MemoryRouter } from "react-router";
 import GenresContextProvider from "../src/contexts/genresContext";
 import { action } from "@storybook/addon-actions";
-import CastContextProvider from "../src/contexts/castContext";
+
 const sample = {
   adult: false,
   backdrop_path: "/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg",
@@ -344,15 +346,28 @@ storiesOf("buttons/customButton")
     return <CustomButton className="btn btn-primary" />;
   });
 
-storiesOf("buttons/addReview")
+storiesOf("buttons/customLinkButton")
   .addDecorator((story) => (
     <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
   ))
   .add("default", () => {
-    return <ReviewButton movie={sample}></ReviewButton>;
+    const movie = { sample };
+    return (
+      <CustomLinkButton
+        className="btn w-100 btn-warning "
+        to={{
+          pathname: `/reviews/form`,
+          state: {
+            movie: movie,
+          },
+        }}
+      >
+        <p> Write A Review... </p>
+      </CustomLinkButton>
+    );
   })
   .add("no movie passed", () => {
-    return <ReviewButton />;
+    return <CustomLinkButton to="" />;
   });
 storiesOf("buttons/addToFavorites")
   .addDecorator((story) => (
@@ -546,4 +561,33 @@ storiesOf("buttons/viewPersonButton", module)
   })
   .add("no parameters passed", () => {
     return <ViewPersonButton />;
+  });
+storiesOf("cast details page/castMovies", module)
+  .addDecorator((story) => (
+    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+  ))
+  .add("default", () => {
+    return <CastMovies person={samplePerson} />;
+  })
+  .add("empty movies array", () => {
+    const movies = [];
+    return (
+      <CastMovies
+        movies={movies}
+        action={(movie) => (
+          <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
+  })
+  .add("undefined movies", () => {
+    const movies = undefined;
+    return (
+      <CastMovies
+        movies={movies}
+        action={(movie) => (
+          <button className="btn w-100 btn-primary">Test</button>
+        )}
+      />
+    );
   });

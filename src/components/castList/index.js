@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import "./castList.css";
 import { getCast } from "../../api/tmdb-api";
 import { CastContext } from "../../contexts/castContext";

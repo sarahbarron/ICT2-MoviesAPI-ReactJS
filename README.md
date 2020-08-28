@@ -1,8 +1,12 @@
 # Project - ReactJS app.
 
-Name: Sarah Barron
+**Name:** Sarah Barron
+
+---
 
 ## Overview.
+
+---
 
 The concept of this project was to expand the Movie App for movie fans, where the main objectives were for a movie fan
 to be able to view a page of movies from different categories, save their favorite movies to their favorites page, view actors and actresses from a movie, view other movies that this cast member has appeared in and save these cast members to favorites cast page. The user can also search for any movie of their choice via the search form.
@@ -48,11 +52,17 @@ to be able to view a page of movies from different categories, save their favori
 - Progammatic Navigation forces the navigation bar to use different links based on if the user is
   authenticated or not.
 
+---
+
 ## Setup requirements.
+
+---
 
 If you wish to use the authentication with firebase you will need to complete the following
 
-### Firebase setup
+### **Firebase setup**
+
+---
 
 - Create an account [firebase](https://firebase.google.com/).
 - Add Project
@@ -88,7 +98,9 @@ Within your project folder open a terminal window and run
 
 - `npm install firebase`
 
-### TMDB Movie API
+### **TMDB Movie API**
+
+---
 
 In order to communicate with the TMDB movie api you need a API Key
 
@@ -98,13 +110,21 @@ In order to communicate with the TMDB movie api you need a API Key
 
   - `REACT_APP_TMDB_KEY= .... paste your API key here ... `
 
-Finally back in your terminal
+### **Project Build and start**
+
+---
+
+Back in your terminal
 `npm install`
 
 To start the App
 `npm start`
 
+---
+
 ## API Data Model.
+
+---
 
 - Get today's trending movies
 
@@ -204,6 +224,8 @@ https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_
 }
 ```
 
+---
+
 - Get upcoming movies
 
 https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&page=1
@@ -281,6 +303,8 @@ https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB
 }
 ```
 
+---
+
 - Get movies by a selected Genre
 
 https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}
@@ -336,6 +360,8 @@ https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB
 }
 ```
 
+---
+
 - Search for a movie
 
 https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&query=${input}&page=1&include_adult=false
@@ -367,6 +393,8 @@ https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_K
   "total_results": 9
 }
 ```
+
+---
 
 - Get a movies cast members
 
@@ -439,6 +467,8 @@ https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP
 }
 ```
 
+---
+
 - View a single cast member
 
 https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US
@@ -463,6 +493,8 @@ https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_K
   "homepage": "http://www.karenallen-fiberarts.com/"
 }
 ```
+
+---
 
 - Get the movies an actor/actress appears in
 
@@ -563,11 +595,21 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 }
 ```
 
+---
+
 ## App Design.
 
-### Component catalogue.
+---
 
-Screenshot from the Storybook UI showing your components' stories. [For projects that expanded the Movies app, hi-light stories relating to new/modified components - see example screenshot below] .......
+### **Component catalogue.**
+
+---
+
+![storybook](/public/readme/storybook.png)
+
+### **UI Design**
+
+---
 
 ![Authentication](/public/readme/authentication-screen.png)
 
@@ -575,51 +617,71 @@ Screenshot from the Storybook UI showing your components' stories. [For projects
 > To Register the user must either enter their email address and password in the Register New Account form and press the Register Now button or alternatively they can click the Signin With Google button which will require the user to be authenticated by Google.  
 > To Login the user must either enter their email address and password in the Login to Existing Account form and press the Login button or alternatively they can click the Signin With Google button which will require the user to be authenticated by Google.
 
+---
+
 ![Authentication-with-google](/public/readme/google-auth.PNG)
 
 > Shows when you click on the Signin with Google Button on the login/signup page a firebase popup appears allowing you to authenticate with your google account.
+
+---
 
 ![trending](/public/readme/trending-movies.png)
 
 > Shows the view for trending movies, A user can filter results by entering text into the list filtering input box or by choosing a genre from the drop down list. A user can click the add to favorites button to add a movie to their favorite list or a they can click on the image to view the movies details page
 
+---
+
 ![upcoming](/public/readme/upcoming-movies.png)
 
 > Shows the view for upcoming movies, A user can filter results by entering text into the list filtering input box or by choosing a genre from the drop down list. A user can click the add to favorites button to add a movie to their favorite list or a they can click on the image to view the movies details page
 
-![upcoming](/public/readme/genre-movies.png)
+---
+
+![genre](/public/readme/genre-movies.png)
 
 > Shows the view when i click on the dropdown navigation a user can select any of the genres and a list of movies from that genre will be shown. A user can filter results by entering text into the list filtering input box or by choosing a genre from the drop down list. A user can click the add to favorites button to add a movie to their favorite list or a they can click on the image to view the movies details page
+
+---
 
 ![search](/public/readme/search-movies.png)
 
 > Shows the view for the search for movies page. The user can input text to the search form input and movies are retrieved that relate to their input and listed. The user can filter results by inputting text into the title search input box or by genre by selecting a genre from the drop down list. A user can also click on the Add to favorites button to add the film to favorites or click on the image to view the films details
 
+---
+
 ![show-cast-button](/public/readme/movie-details-with-extended-show-cast-button.png)
 
 > This shows the movies details view which i have extended with a nested route to show cast members. A user can view these by clicking on the show cast button.
+
+---
 
 ![show-cast-list](/public/readme/movie-details-with-cast-list.png)
 
 > This shows a movie details page after a user has clicked on the show cast button. The user can click on the hide cast button to return to just movie details or they can click on the more details button for any of the cast members to be routed to the cast members details.
 
+---
+
 ![cast-details](/public/readme/cast-details.png)
 
 > This shows A cast members details. The user can click on the add to favorites button to add the cast member to their favorites list or they can click on the nested route button - view movies 'cast name' has appeared in to view a list of other films this cast member has appeared in.
+
+---
 
 ![cast-details-movies](/public/readme/cast-details-with-movies-appeared-in.png)
 
 > This view shows the cast members details with the movies they have appeared in. The user can click on the hide movies button to return to the cast details view or they can click on the More details to view details of that movie.
 
+---
+
 ![cast-favorites](/public/readme/favorite-cast.png)
 
 > This view shows a list of cast members that have been added to the users favorites list. They appear in a card and the user can click on the more details button in each card to view the details of the cast member or they can filter cast members by inputting the cast members name in the list filtering form.
 
-### UI Design.
+---
 
-![Authentication][view]
+### **Routing**.
 
-### Routing.
+---
 
 /authenticate - authenticationPage - Displays the login / signup page
 
@@ -647,7 +709,11 @@ Screenshot from the Storybook UI showing your components' stories. [For projects
 
 - /reviews/form
 
+---
+
 ## React feature set.
+
+---
 
 - useState hook - src/components/castMovies/index.js
 - useEffect hook - src/components/castMovies/index.js
@@ -675,8 +741,71 @@ Screenshot from the Storybook UI showing your components' stories. [For projects
 - memo - src/components/authForm/index.js
 - storybook - stories/index.js
 
+---
+
 ## Independent learning.
 
-### Firebase
+---
 
-. . . . . Briefly state the technologies/techniques used in your project codebase that were not covered in the lectures/labs. Provide source code filename references to support your assertions and include source material references (articles/blogs) .........
+### **Firebase**
+
+#### **Authentication**
+
+Allowed me to securely manage users authentication using their email addresses and passwords or google authentication to register or sign in.
+
+### **firestore**
+
+This is firebases noSQL database where I am storing the users details.
+
+#### **used in the following files: **
+
+- api - src/api/firebase-utils.js
+- authentication context - src/contexts/authContext.js
+- authentication forms - src/components/authForm/index.js
+
+#### **references:**
+
+- I did a follow on udemy course where firebase authentication and firestorm were covered
+  https://www.udemy.com/course/complete-react-developer-zero-to-mastery/
+- https://blog.logrocket.com/user-authentication-firebase-react-apps/
+- https://firebase.google.com/docs/auth
+- https://firebase.google.com/docs/firestore
+
+---
+
+### **Advanced Web Form processing using the useForms hook**
+
+For the login form, register form and the search form I used the useForm hook
+
+#### **Used in the following files:**
+
+- src/components/authForm/index.js
+- src/components/searchForm/index.js
+
+#### **References:**
+
+- Class tutorial
+- https://react-hook-form.com/
+
+### **Memoization**
+
+I looked at memoization for my authForm as the google authentication popup menu was having performance issues it was taking a long time to load. However, I now feel that the problem is more to do with the firebase popup box than my react project. After going through the site I didn't feel there were any performance issues elsewhere so did not add the memo hook to any further pages.
+
+#### **source code:**
+
+- src/components/authForm/index.js
+
+#### **Referances:**
+
+- https://medium.com/@sdolidze/react-hooks-memoization-99a9a91c8853#:~:text=React.memo%20is%20a%20performance%20optimization%20tool%2C%20a%20higher,the%20component%2C%20and%20reuse%20the%20last%20rendered%20result.
+- https://reactjs.org/docs/react-api.html#reactmemo
+
+---
+
+### **Cloud Deployment:**
+
+I choose to deploy the website with Zeit Now as it hosts serverless APIs for free
+
+#### **References:**
+
+- https://create-react-app.dev/docs/deployment/

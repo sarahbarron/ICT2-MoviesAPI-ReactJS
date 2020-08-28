@@ -6,15 +6,12 @@
 
 ## Overview.
 
----
-
-The concept of this project was to expand the Movie App for movie fans, where the main objectives were for a movie fan
-to be able to view a page of movies from different categories, save their favorite movies to their favorites page, view actors and actresses from a movie, view other movies that this cast member has appeared in and save these cast members to favorites cast page. The user can also search for any movie of their choice via the search form.
+The concept of this project was to expand the Movie App for movie fans, where the main objectives were for a movie fan to view a list of movies from different categories, save their favorite movies from every category to their favorite movies list, view actors and actresses from a movie, view other movies that this cast member has appeared in and save these cast members to favorites cast list. The user can also search for any movie of their choice via the search form.
 
 - Authentication page
   - Login
     - Form to allow email & password login via firebase
-    - google authentication sign login via firebase
+    - google authentication login via firebase
   - Register
     - Form to allow email & password registration via firebase
     - google authentication registration via firebase
@@ -33,8 +30,14 @@ to be able to view a page of movies from different categories, save their favori
     - Display reviews of an upcoming movie
   - Add an upcoming movie to favorites
   - Add a review to an upcoming movie
-- View movies by genre - via a dropdown menu on the nav bar select a genre, movies for this
-  genre will be returned. - Display a list of the selected genre Movies. - Display details of the selected genre movie. - Display cast members of the selected genre movie - Display reviews of the selected genre movie - Add a selected genre movie to favorites - Add a review to the selected genre movie
+- View movies by genre - via a dropdown menu on the nav bar select a genre. Movies for this
+  genre will be returned.
+  - Display a list of the selected genre Movies.
+  - Display details of the selected genre movie.
+    - Display cast members of the selected genre movie
+    - Display reviews of the selected genre movie
+  - Add a selected genre movie to favorites
+  - Add a review to the selected genre movie
 - Search for a movie via a form
   - Display a list of movies returned in the search results.
   - Display details of a searched movie.
@@ -56,17 +59,15 @@ to be able to view a page of movies from different categories, save their favori
 
 ## Setup requirements.
 
----
-
-If you wish to use the authentication with firebase you will need to complete the following
-
 ### **Firebase setup**
 
 ---
 
-- Create an account [firebase](https://firebase.google.com/).
+firebase is needed for user authentication and storing of user information
+
+- Create an account with [firebase](https://firebase.google.com/).
 - Add Project
-  - Give your project a name.
+  - Give the project a name.
   - Create project.
 - In the side menu click project overview
 
@@ -94,7 +95,7 @@ If you wish to use the authentication with firebase you will need to complete th
 
 Open the .gitignore file and add `.env` to the end of the file
 
-Within your project folder open a terminal window and run
+Within the project folder open a terminal window and run
 
 - `npm install firebase`
 
@@ -102,10 +103,11 @@ Within your project folder open a terminal window and run
 
 ---
 
-In order to communicate with the TMDB movie api you need a API Key
+In order to communicate with the TMDB movie api you need an API Key
 
-- Register and account with [TMDB]('https://www.themoviedb.org/')
-- Login into the account and click the 'API' link in the left sidebar.
+- Register an account with
+  [TMDB]('https://www.themoviedb.org/')
+- Login into the account and click the 'API' link in the left sidebar. Copy the API key
 - Back in our project folder, in the .env file you created earlier add the following
 
   - `REACT_APP_TMDB_KEY= .... paste your API key here ... `
@@ -114,7 +116,7 @@ In order to communicate with the TMDB movie api you need a API Key
 
 ---
 
-Back in your terminal
+Back in the terminal
 `npm install`
 
 To start the App
@@ -123,8 +125,6 @@ To start the App
 ---
 
 ## API Data Model.
-
----
 
 - Get today's trending movies
 
@@ -396,7 +396,7 @@ https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_K
 
 ---
 
-- Get a movies cast members
+- Get movies cast members
 
 https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}
 
@@ -496,7 +496,7 @@ https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_K
 
 ---
 
-- Get the movies an actor/actress appears in
+- Get the movies that an actor/actress appears in
 
 https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US
 
@@ -611,6 +611,8 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 ---
 
+#### **Authentication View**
+
 ![Authentication](/public/readme/authentication-screen.png)
 
 > Shows the authentication screen for login or register. User input is required.
@@ -619,11 +621,15 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 ---
 
-![Authentication-with-google](/public/readme/google-auth.PNG)
+#### **Authentication with Google**
+
+![Authentication-with-google](/public/readme/google-auth.png)
 
 > Shows when you click on the Signin with Google Button on the login/signup page a firebase popup appears allowing you to authenticate with your google account.
 
 ---
+
+#### **Trending Movies View**
 
 ![trending](/public/readme/trending-movies.png)
 
@@ -631,17 +637,23 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 ---
 
+#### **Upcoming Movies View**
+
 ![upcoming](/public/readme/upcoming-movies.png)
 
 > Shows the view for upcoming movies, A user can filter results by entering text into the list filtering input box or by choosing a genre from the drop down list. A user can click the add to favorites button to add a movie to their favorite list or a they can click on the image to view the movies details page
 
 ---
 
+#### **Genre Movies View**
+
 ![genre](/public/readme/genre-movies.png)
 
-> Shows the view when i click on the dropdown navigation a user can select any of the genres and a list of movies from that genre will be shown. A user can filter results by entering text into the list filtering input box or by choosing a genre from the drop down list. A user can click the add to favorites button to add a movie to their favorite list or a they can click on the image to view the movies details page
+> Shows the view when i click on the dropdown navigation a user can select any of the genres and a list of movies from that genre will be shown. A user can filter results by entering text into the list filtering input. A user can click the add to favorites button to add a movie to their favorite list or a they can click on the image to view the movies details page
 
 ---
+
+#### **Search for a movie view**
 
 ![search](/public/readme/search-movies.png)
 
@@ -649,11 +661,15 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 ---
 
+#### **Movie Details extended to include the show cast button**
+
 ![show-cast-button](/public/readme/movie-details-with-extended-show-cast-button.png)
 
 > This shows the movies details view which i have extended with a nested route to show cast members. A user can view these by clicking on the show cast button.
 
 ---
+
+#### **Cast List view**
 
 ![show-cast-list](/public/readme/movie-details-with-cast-list.png)
 
@@ -661,17 +677,23 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 ---
 
+#### **Single Cast Details View**
+
 ![cast-details](/public/readme/cast-details.png)
 
-> This shows A cast members details. The user can click on the add to favorites button to add the cast member to their favorites list or they can click on the nested route button - view movies 'cast name' has appeared in to view a list of other films this cast member has appeared in.
+> This shows a cast members details. The user can click on the add to favorites button to add the cast member to their favorites list or they can click on the nested route button - view movies 'cast name' has appeared in to view a list of other films this cast member has appeared in.
 
 ---
+
+#### **View to show movies a single cast member appeared in**
 
 ![cast-details-movies](/public/readme/cast-details-with-movies-appeared-in.png)
 
 > This view shows the cast members details with the movies they have appeared in. The user can click on the hide movies button to return to the cast details view or they can click on the More details to view details of that movie.
 
 ---
+
+#### **Favorite Cast View**
 
 ![cast-favorites](/public/readme/favorite-cast.png)
 
@@ -683,25 +705,25 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 ---
 
-/authenticate - authenticationPage - Displays the login / signup page
+**/authenticate** - authenticationPage - Displays the login / signup page
 
-/cast/favorites - (Private Route) - favoriteCastPage Displays a list of the users favorite cast members
+**/cast/favorites** - (Private Route) - favoriteCastPage Displays a list of the users favorite cast members
 
-/trending - trendingMoviesPage - Displays a list of trending movies
+**/trending** - trendingMoviesPage - Displays a list of trending movies
 
-/upcoming - upcomingMoviesPage - Displays a list of upcoming movies
+**/upcoming** - upcomingMoviesPage - Displays a list of upcoming movies
 
-/movies/genres/:id - genreMoviesPage - Displays a list of movies based on the genre the user has selected.
+**/movies/genres/:id** - genreMoviesPage - Displays a list of movies based on the genre the user has selected.
 
-/search - searchForMoviePage - Displays a list of movies depending on users search results
+**/search** - searchForMoviePage - Displays a list of movies depending on users search results
 
-/person/:id - castDetailsPage - Displays a single cast members details.
+**/person/:id** - castDetailsPage - Displays a single cast members details.
 
-/movies/\${id}/cast - (Nested Route in the movieDetailsPage) - Displays a list of cast members for a movie.
+**/movies/\${id}/cast** - (Nested Route in the movieDetailsPage) - Displays a list of cast members for a movie.
 
-/person/:id/movies-appeared-in - (Nested Route in the castDetailsPage) Displays a list of movies that a actor/actress has appeared in
+**/person/:id/movies-appeared-in** - (Nested Route in the castDetailsPage) Displays a list of movies that a actor/actress has appeared in
 
-3 Private Routes:
+**3 Private Routes:**
 
 - /cast/favorites
 
@@ -715,31 +737,31 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 ---
 
-- useState hook - src/components/castMovies/index.js
-- useEffect hook - src/components/castMovies/index.js
-- useContext hook - src/components/castList/index.js
-- useForm - src/components/authForm/index.js
-- useReducer - src/contexts/castContext.js
-- Custom hooks
-  - usePerson - src/hooks/usePerson.js
-  - useGenre - src/hooks/useGenre.js
-- createContext - src/contexts/authContext.js
-- Stateful components -src/components/searchForm/index.js
-- Stateless components - src/components/welcome/index.js
-- Unidirectional dataflow - src/components/castCard/index.js
-- Data-down-action-up - src/components/buttons/AddCastFavorites.js
-- Extended \<Link\> - src/components/buttons/customLinkButton.js
-- Programmatic navigation
-  - Declarative - src/components/authForm/index.js
-  - Imperative - src/pages/castDetailsPage
-- Nested routing - src/pages/castDetailsPage.js
-- Parameterized routing - index.js (/person/:id )
-- Composition
-  - Container Pattern - src/components/customButton.js
-  - Render Pattern - src/pages/castDetailsPage.js
-- Provider Pattern - src/contexts/castContext.js
-- memo - src/components/authForm/index.js
-- storybook - stories/index.js
+- **useState hook** - src/components/castMovies/index.js
+- **useEffect hook** - src/components/castMovies/index.js
+- **useContext hook** - src/components/castList/index.js
+- **useForm** - src/components/authForm/index.js
+- **useReducer** - src/contexts/castContext.js
+- **Custom hooks**
+  - **usePerson** - src/hooks/usePerson.js
+  - **useGenre** - src/hooks/useGenre.js
+- **createContext** - src/contexts/authContext.js
+- **Stateful components** -src/components/searchForm/index.js
+- **Stateless components** - src/components/welcome/index.js
+- **Unidirectional dataflow** - src/components/castCard/index.js
+- **Data-down-action-up** - src/components/buttons/AddCastFavorites.js
+- **Extended \<Link\>** - src/components/buttons/customLinkButton.js
+- **Programmatic navigation**
+  - **Declarative** - src/components/authForm/index.js
+  - **Imperative** - src/pages/castDetailsPage
+- **Nested routing** - src/pages/castDetailsPage.js
+- **Parameterized routing** - index.js (/person/:id )
+- **Composition**
+  - **Container Pattern** - src/components/customButton.js
+  - **Render Pattern** - src/pages/castDetailsPage.js
+- **Provider Pattern** - src/contexts/castContext.js
+- **memo** - src/components/authForm/index.js
+- **storybook** - stories/index.js
 
 ---
 
@@ -753,11 +775,11 @@ https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.RE
 
 Allowed me to securely manage users authentication using their email addresses and passwords or google authentication to register or sign in.
 
-### **firestore**
+### **Firestore**
 
 This is firebases noSQL database where I am storing the users details.
 
-#### **used in the following files: **
+#### **Source code**
 
 - api - src/api/firebase-utils.js
 - authentication context - src/contexts/authContext.js
@@ -777,12 +799,14 @@ This is firebases noSQL database where I am storing the users details.
 
 For the login form, register form and the search form I used the useForm hook
 
-#### **Used in the following files:**
+#### **Source Code:**
 
 - src/components/authForm/index.js
 - src/components/searchForm/index.js
 
 #### **References:**
+
+---
 
 - Class tutorial
 - https://react-hook-form.com/
@@ -809,3 +833,4 @@ I choose to deploy the website with Zeit Now as it hosts serverless APIs for fre
 #### **References:**
 
 - https://create-react-app.dev/docs/deployment/
+- https://vercel.com/docs

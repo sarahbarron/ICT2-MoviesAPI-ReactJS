@@ -11,7 +11,7 @@ const GenreMoviesPage = (props) => {
     <>
       {movies ? (
         <PageTemplate
-          title="All Movies"
+          title="Genre Movies"
           movies={movies}
           action={(movie) => <AddToFavoritesButton movie={movie} />}
         />

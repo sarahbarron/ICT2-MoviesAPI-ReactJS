@@ -45,11 +45,11 @@ The concept of this project was to expand the Movie App for movie fans, where th
     - Display reviews of the searched movie
   - Add a searched movie to favorites
   - Add a review to the searched movie
-- On the movie details page a second nested route view showing a list of cast members for a movie displayed in a table with the cast members image, details and a data hyperlinking button to view more details
-- View a cast members further details with header, image and further details
-- Nested route view of other movies that a cast member has appeared in, with a button link to view the movies details
-- In the cast details page a user can add the cast member to favorite cast.
-- Filter favorite cast members by name.
+- On the movie details page a second nested route has been added to show a list of cast members for a movie displayed in a table with the cast members image, details and a data hyperlinking button to view more details
+- View a cast members details with header, image and further details
+- On the cast details page there is a nested route view to show other movies that a cast member has appeared in, with a button link to view the movies details
+- In the cast details page a user can add the cast member to their favorite cast list.
+- A user can filter favorite cast members by name.
 - Protected Routes added to favorite movies page, favorite cast page and adding a review page
   only authenticated users can view these 3 pages.
 - Progammatic Navigation forces the navigation bar to use different links based on if the user is
@@ -806,14 +806,14 @@ For the login form, register form and the search form I used the useForm hook
 
 #### **References:**
 
----
-
 - Class tutorial
 - https://react-hook-form.com/
 
+---
+
 ### **Memoization**
 
-I looked at memoization for my authForm as the google authentication popup menu was having performance issues it was taking a long time to load. However, I now feel that the problem is more to do with the firebase popup box than my react project. After going through the site I didn't feel there were any performance issues elsewhere so did not add the memo hook to any further pages.
+I looked at memoization for my authForm as the google authentication popup menu was having performance issues it was taking a long time to load. However, I now feel that the problem is more to do with the firebase popup box than my react project. I check the rest of the project and didn't feel there were any performance issues elsewhere so did not add the memo hook to any further pages.
 
 #### **source code:**
 

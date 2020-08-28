@@ -6,7 +6,13 @@
 
 ## Overview.
 
-The concept of this project was to expand the Movie App for movie fans, where the main objectives were for a movie fan to view a list of movies from different categories, save their favorite movies from every category to their favorite movies list, view actors and actresses from a movie, view other movies that this cast member has appeared in and save these cast members to favorites cast list. The user can also search for any movie of their choice via the search form.
+The concept of this project was to expand the Movie App for movie fans, where the main objectives were for a movie fan to:
+
+- View a list of movies from different categories
+- Save their favorite movies from any category to their favorite movies list
+- View actors and actresses from a movie
+- View other movies that this cast member has appeared in - Save a cast members to the users favorites cast list.
+- Search for any movie of the users choice via the search form.
 
 - Authentication page
   - Login

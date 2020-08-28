@@ -830,6 +830,8 @@ I looked at memoization for my authForm as the google authentication popup menu 
 
 I choose to deploy the website with Zeit Now as it hosts serverless APIs for free
 
+**Deployed Site:** https://movies-app-peach.vercel.app/
+
 #### **References:**
 
 - https://create-react-app.dev/docs/deployment/

@@ -65,6 +65,8 @@ If you wish to use the authentication with firebase you will need to complete th
   - Register App.
   - In the firebase SDK snippet - Config, copy the firebaseConfig code.
 
+  ![firebaseConfig](/public/readme/firebase-config.png)
+
 - Back to the project in the root directory create a file called .env
 - inside the .env file add the following copying the values from the firebaseConfig code
   in where highlighted
@@ -619,30 +621,62 @@ Screenshot from the Storybook UI showing your components' stories. [For projects
 
 ### Routing.
 
-...... Insert a list of the routes supported by your app and state the associated view. If relevant, specify which of the routes require authentication, i.e. protected/private. For projects that expanded the Movies Fan app, only new routes should be listed .........
+/authenticate - authenticationPage - Displays the login / signup page
 
-- /blogs - displays all published blogs.
-- /blogs/:id (private) - detail view of a particular blog.
-- /blogs/:id/comments (private) - detail view of a particular blog and its comments.
-- etc.
-- etc.
+/cast/favorites - (Private Route) - favoriteCastPage Displays a list of the users favorite cast members
+
+/trending - trendingMoviesPage - Displays a list of trending movies
+
+/upcoming - upcomingMoviesPage - Displays a list of upcoming movies
+
+/movies/genres/:id - genreMoviesPage - Displays a list of movies based on the genre the user has selected.
+
+/search - searchForMoviePage - Displays a list of movies depending on users search results
+
+/person/:id - castDetailsPage - Displays a single cast members details.
+
+/movies/\${id}/cast - (Nested Route in the movieDetailsPage) - Displays a list of cast members for a movie.
+
+/person/:id/movies-appeared-in - (Nested Route in the castDetailsPage) Displays a list of movies that a actor/actress has appeared in
+
+3 Private Routes:
+
+- /cast/favorites
+
+- /movies/favorites
+
+- /reviews/form
 
 ## React feature set.
 
-..... Insert a bullet-point list of the React features used in your project, including one source code file references for each - see examples below ......
-
-- useState and useEffect hooks - src/components/fileA.js
-- useContext hook - src/components/fileb.js
-- Extended Link - src/components/fileA.js
-- Programmatic navigation - src/pages/fileC.js
-- etc
-- etc
-- etc
+- useState hook - src/components/castMovies/index.js
+- useEffect hook - src/components/castMovies/index.js
+- useContext hook - src/components/castList/index.js
+- useForm - src/components/authForm/index.js
+- useReducer - src/contexts/castContext.js
+- Custom hooks
+  - usePerson - src/hooks/usePerson.js
+  - useGenre - src/hooks/useGenre.js
+- createContext - src/contexts/authContext.js
+- Stateful components -src/components/searchForm/index.js
+- Stateless components - src/components/welcome/index.js
+- Unidirectional dataflow - src/components/castCard/index.js
+- Data-down-action-up - src/components/buttons/AddCastFavorites.js
+- Extended \<Link\> - src/components/buttons/customLinkButton.js
+- Programmatic navigation
+  - Declarative - src/components/authForm/index.js
+  - Imperative - src/pages/castDetailsPage
+- Nested routing - src/pages/castDetailsPage.js
+- Parameterized routing - index.js (/person/:id )
+- Composition
+  - Container Pattern - src/components/customButton.js
+  - Render Pattern - src/pages/castDetailsPage.js
+- Provider Pattern - src/contexts/castContext.js
+- memo - src/components/authForm/index.js
+- storybook - stories/index.js
 
 ## Independent learning.
 
-. . . . . Briefly state the technologies/techniques used in your project codebase that were not covered in the lectures/labs. Provide source code filename references to support your assertions and include source material references (articles/blogs) .........
+### Firebase
 
-[model]: ./data.jpg
-[view]: ./view.png
-[stories]: ./storybook.png
+. . . . . Briefly state the technologies/techniques used in your project codebase that were not covered in the lectures/labs. Provide source code filename references to support your assertions and include source material references (articles/blogs) .........

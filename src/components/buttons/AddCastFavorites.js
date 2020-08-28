@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 import { CastContext } from "../../contexts/castContext";
 
 const AddCastFavoritesButton = ({ person }) => {
-  const [favorite, setFavorite] = useState("Add to Favorites");
+  const [buttonText, setButtonText] = useState("Add to Favorites");
   const context = useContext(CastContext);
 
   const handleAddToCastFavorite = (e) => {
-    if (favorite === "Add to Favorites") {
+    if (buttonText === "Add to Favorites") {
       e.preventDefault();
       context.addToCastFavorites(person.id);
-      setFavorite(`${person.name} has been added to your favorites`);
+      setButtonText(`${person.name} has been added to your favorites`);
     }
   };
   try {
@@ -19,7 +19,7 @@ const AddCastFavoritesButton = ({ person }) => {
         className="btn w-100 btn-success fav-button"
         onClick={handleAddToCastFavorite}
       >
-        {favorite}
+        {buttonText}
       </button>
     );
   } catch (e) {

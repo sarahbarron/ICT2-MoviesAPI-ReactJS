@@ -58,7 +58,7 @@ const App = () => {
 
                     <Route path="/trending" component={TrendingMoviesPage} />
                     <Route path="/upcoming" component={UpcomingMoviesPage} />
-                    <PrivateRoute
+                    <Route
                       path="/movies/genres/:id"
                       component={GenreMoviesPage}
                     />

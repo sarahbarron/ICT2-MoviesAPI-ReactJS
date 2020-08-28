@@ -16,7 +16,7 @@ const MovieCard = ({ movie, action }) => {
               src={
                 movie.poster_path
                   ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                  : "./film-poster-placeholder.png"
+                  : "/film-poster-placeholder.png"
               }
             />
           </Link>

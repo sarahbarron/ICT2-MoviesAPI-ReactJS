@@ -37,7 +37,7 @@ export default ({ movie }) => {
                       src={
                         c.profile_path
                           ? `https://image.tmdb.org/t/p/w500/${c.profile_path}`
-                          : `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                          : `/film-poster-placeholder.png`
                       }
                     />
                   </td>

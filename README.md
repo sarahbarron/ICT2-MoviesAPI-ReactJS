@@ -813,7 +813,7 @@ For the login form, register form and the search form I used the useForm hook
 
 ### **Memoization**
 
-I looked at memoization for my authForm as the google authentication popup menu was having performance issues it was taking a long time to load. However, I now feel that the problem is more to do with the firebase popup box than my react project. I check the rest of the project and didn't feel there were any performance issues elsewhere so did not add the memo hook to any further pages.
+I looked at memoization for my authForm as the google authentication popup menu was having performance issues it was taking a long time to load. However, I now feel that the problem is more to do with the firebase popup box than my react project. I checked the rest of the project and didn't feel there were any performance issues elsewhere so did not add the memo hook to any further pages.
 
 #### **source code:**
 

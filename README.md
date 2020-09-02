@@ -818,11 +818,11 @@ I looked at memoization for my authForm as the google authentication popup menu 
 #### **source code:**
 
 - src/components/authForm/index.js
-- https://uk.search.yahoo.com/search;_ylt=AwrJS5WRZ09f4FwAx1QM34lQ;_ylc=X1MDMTM1MTIxMjgxMgRfcgMyBGZyA21jYWZlZQRncHJpZANadGFlbHZrWFRZVzhoRkt1bU85NnhBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN1ay5zZWFyY2gueWFob28uY29tBHBvcwMwBHBxc3RyAwRwcXN0cmwDMARxc3RybAMyMgRxdWVyeQN3aGVuJTIwdG8lMjB1c2UlMjBSZWFjdC5tZW1vBHRfc3RtcAMxNTk5MDM5Mzg2?p=when+to+use+React.memo&fr2=sb-top&fr=mcafee&type=E211GB105G0
 
 #### **Referances:**
 
 - https://medium.com/@sdolidze/react-hooks-memoization-99a9a91c8853#:~:text=React.memo%20is%20a%20performance%20optimization%20tool%2C%20a%20higher,the%20component%2C%20and%20reuse%20the%20last%20rendered%20result.
+- https://uk.search.yahoo.com/search;_ylt=AwrJS5WRZ09f4FwAx1QM34lQ;_ylc=X1MDMTM1MTIxMjgxMgRfcgMyBGZyA21jYWZlZQRncHJpZANadGFlbHZrWFRZVzhoRkt1bU85NnhBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN1ay5zZWFyY2gueWFob28uY29tBHBvcwMwBHBxc3RyAwRwcXN0cmwDMARxc3RybAMyMgRxdWVyeQN3aGVuJTIwdG8lMjB1c2UlMjBSZWFjdC5tZW1vBHRfc3RtcAMxNTk5MDM5Mzg2?p=when+to+use+React.memo&fr2=sb-top&fr=mcafee&type=E211GB105G0
 - https://reactjs.org/docs/react-api.html#reactmemo
 
 ---

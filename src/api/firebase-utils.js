@@ -19,8 +19,7 @@ firebase.initializeApp(config);
 
 // configuring the firebase for google auth
 
-// we need to export these out so it can
-// be used anywhere we need authentication or the db
+// export these out so they can be used anywhere
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 

@@ -813,11 +813,12 @@ For the login form, register form and the search form I used the useForm hook
 
 ### **Memoization**
 
-I looked at memoization for my authForm as the google authentication popup menu was having performance issues it was taking a long time to load. However, I now feel that the problem is more to do with the firebase popup box than my react project. I checked the rest of the project and didn't feel there were any performance issues elsewhere so did not add the memo hook to any further pages.
+I looked at memoization for my authForm as the google authentication popup menu was having performance issues it was taking a long time to load. However, I now feel that the problem is more to do with the firebase popup box than my react project. I checked the rest of the project and didn't feel there were any performance issues elsewhere and props where changing on most pages,so I did not add the memo hook to any further pages.
 
 #### **source code:**
 
 - src/components/authForm/index.js
+- https://uk.search.yahoo.com/search;_ylt=AwrJS5WRZ09f4FwAx1QM34lQ;_ylc=X1MDMTM1MTIxMjgxMgRfcgMyBGZyA21jYWZlZQRncHJpZANadGFlbHZrWFRZVzhoRkt1bU85NnhBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgN1ay5zZWFyY2gueWFob28uY29tBHBvcwMwBHBxc3RyAwRwcXN0cmwDMARxc3RybAMyMgRxdWVyeQN3aGVuJTIwdG8lMjB1c2UlMjBSZWFjdC5tZW1vBHRfc3RtcAMxNTk5MDM5Mzg2?p=when+to+use+React.memo&fr2=sb-top&fr=mcafee&type=E211GB105G0
 
 #### **Referances:**
 
